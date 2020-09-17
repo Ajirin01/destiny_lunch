@@ -3,25 +3,28 @@
     <h3 class="text-center">{{$title}}</h3>
     @if ($upper)
         <div class="col-12">
-            <div class="single-blog-post featured-post col-12">
-                <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="/storage/uploads/{{$articles[0]->article_intro_image}}" alt=""></a>
-                <div class="post-data">
-                    <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}" class="post-title">
-                        <h6>{{$articles[0]->article_title}}</h6> 
-                    </a>
-                    <div class="post-meta">
-                        <div class="d-flex align-items-center">
-                            <a href="{{URL::to('articles/nigerians-at-home-achievers/1')}}" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
-                            <a href="{{URL::to('articles/nigerians-at-home-achievers/1')}}" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+            @if (count($articles) > 0)
+                <div class="single-blog-post featured-post col-12">
+                    <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="/storage/uploads/{{$articles[0]->article_intro_image}}" alt=""></a>
+                    <div class="post-data">
+                        <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}" class="post-title">
+                            <h6>{{$articles[0]->article_title}}</h6> 
+                        </a>
+                        <div class="post-meta">
+                            <div class="d-flex align-items-center">
+                                <a href="{{URL::to('articles/nigerians-at-home-achievers/1')}}" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
+                                <a href="{{URL::to('articles/nigerians-at-home-achievers/1')}}" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @else
+                <h3 class="text-center">Ops! Article content is unavailable at the moment</h3>
+                <h3 class="text-center">Please check again later</h3>
+                <img src="{{asset('site/img/bg-img/ops.gif')}}" alt="">
+            @endif
+            
         </div>
-    @endif
-
-    @if ($error)
-        <h1>Error</h1>
     @endif
         
     </div>
@@ -29,7 +32,7 @@
 @endsection
 
 @section('lower-content')
-@if ($lower)
+@if (count($articles) > 0)
         <!-- ##### Blog Area Start ##### -->
     <div style="margin-top: 30px" class="blog-area section-padding-0-80">
         <div class="container">

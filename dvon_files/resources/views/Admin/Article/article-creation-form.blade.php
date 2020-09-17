@@ -31,20 +31,41 @@
                     @endif
                     <select name="article_type" class="form-control" id="">
                         <option value="">Please select the article type to create</option>
-                        <option value="nigerians-at-home-achievers">Nigerians at Home Achievers</option>
-                        <option value="nigerians-in-diaspora-achievers">Nigerians in Diaspora Achievers</option>
-                        <option value="nigerians_at_home_achievers">Notable Profiles</option>
-                        <option value="nigerians_at_home_achievers">Regional Updates</option>
-                        <option value="nigerians_at_home_achievers">Disapora Updates</option>
-                        <option value="nigerians_at_home_achievers">Global Updates</option>
-                        <option value="nigerians_at_home_achievers">Tribes & Culture</option>
-                        <option value="nigerians_at_home_achievers">Agriculture</option>
-                        <option value="nigerians_at_home_achievers">Mineral Resources</option>
-                        <option value="nigerians_at_home_achievers">Tourism</option>
-                        {{-- <option value="nigerians_at_home_achievers">nigerians at home achievers</option>
-                        <option value="nigerians_at_home_achievers">nigerians at home achievers</option>
-                        <option value="nigerians_at_home_achievers">nigerians at home achievers</option>
-                        <option value="nigerians_at_home_achievers">nigerians at home achievers</option> --}}
+                        <?php
+                            $article_index = [
+                            'nigerians-at-home-achievers',
+                            'nigerians-in-diaspora-achievers',
+                            'notable-profiles',
+                            'regional-updates',
+                            'disapora-updates',
+                            'global-updates',
+                            'tribes-and-culture',
+                            'agriculture',
+                            'mineral-resources',
+                            'tourism',
+                            'technology-tips',
+                            'business-supports',
+                            'industrial-development',
+                            'made-in-nigeria-products',
+                            'exclusive-services',
+                            'promotions',
+                            'invest-in-nigeria',
+                            'not-for-profits',
+                            'humanitarian',
+                            'destiny-nigeria-development-projects-initiatives',
+                        ];
+                        function getArticleIndice($article_index, $index){
+                            $article_at_index = $article_index[$index];
+                            $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
+                            $data = array('type'=>$article_at_index, 'title'=>$article_title);
+                            return $data;
+                        }
+                        for($i = 0; $i< count($article_index); $i++){
+                            echo "
+                            <option id='$i' value='".getArticleIndice($article_index, $i)['type']."'>".getArticleIndice($article_index, $i)['title']."</option>
+                            ";
+                        }
+                        ?>
                     </select>
                 </div>
                 <div class="form-group">

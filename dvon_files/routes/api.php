@@ -7,7 +7,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/upload-tinymce', function(Request $request){
-    $accepted_origin = array("http://localhost:8000", "http://destiny.isaacolabisi.com.ng");
+    $accepted_origin = array("http://localhost:8000", "http://destiny.isaacolabisi.com.ng", "http://destiny.com");
     
     if($request->has('file')){
         $image = $request->file('file');

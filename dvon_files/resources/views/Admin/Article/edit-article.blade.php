@@ -4,7 +4,7 @@
 <div class="page-wrapper">
     <div class="content">
         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
+            <div class="col-lg-9  offset-lg-1">
                 <h4 class="page-title text-center text-success">
                     @if(session('msg'))
                     {{session('msg')}}
@@ -15,34 +15,92 @@
                     {{session('error')}}
                     @endif
                 </h4>
-                <h4 class="page-title">Edit Article</h4>
+            </div>
+            <div class="col-lg-9 offset-lg-1">
+                <h4 class="page-title">Add Article</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 offset-lg-2">
-            <form action="{{ url('admin/blog/'.$article->id) }}" method="POST" enctype="multipart/form-data">
+            <div class="col-lg-9 offset-lg-1">
+                <form action="{{ url('admin/article/'.$article->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
                         <label>Article Title</label>
-                        <input class="form-control" type="text" name="article_title" value="{{$article->blog_title}}">
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>
+                        @endif
+                        <select name="article_type" class="form-control" id="">
+                        <option value="{{$article->article_type}}"><?php echo strtoupper(preg_replace("/-/"," ",$article->article_type));?></option>
+                            <?php
+                                $article_index = [
+                                'nigerians-at-home-achievers',
+                                'nigerians-in-diaspora-achievers',
+                                'notable-profiles',
+                                'regional-updates',
+                                'disapora-updates',
+                                'global-updates',
+                                'tribes-and-culture',
+                                'agriculture',
+                                'mineral-resources',
+                                'tourism',
+                                'technology-tips',
+                                'business-supports',
+                                'industrial-development',
+                                'made-in-nigeria-products',
+                                'exclusive-services',
+                                'promotions',
+                                'invest-in-nigeria',
+                                'not-for-profits',
+                                'humanitarian',
+                                'destiny-nigeria-development-projects-initiatives',
+                            ];
+                            function getArticleIndice($article_index, $index){
+                                $article_at_index = $article_index[$index];
+                                $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
+                                $data = array('type'=>$article_at_index, 'title'=>$article_title);
+                                return $data;
+                            }
+                            for($i = 0; $i< count($article_index); $i++){
+                                echo "
+                                <option id='$i' value='".getArticleIndice($article_index, $i)['type']."'>".getArticleIndice($article_index, $i)['title']."</option>
+                                ";
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label>Article Image</label>
+                        <label>Article Title</label>
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>
+                        @endif
+                        <input class="form-control" type="text" name="article_title" value="{{$article->article_title}}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Article Intro Image</label>
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_image')}}*</div>
+                        @endif
                         <div>
-                            <input class="form-control" type="file" name="article_image">
+                            <input class="form-control" type="file" name="article_intro_image">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Article Description</label>
-                        <textarea cols="30" rows="15" class="form-control tinymce" name="article_description" >{{$article->blog_description}}</textarea>
+                        <label>Article Introduction</label>
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_description')}}*</div>
+                        @endif
+                        <textarea cols="30" rows="10" class="form-control" id="intro" name="article_intro"><?php echo $article->article_intro ;?></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Tags <small>(separated with a comma)</small></label>
-                        <input type="text" placeholder="Enter your tags" data-role="tagsinput" class="form-control" name="article_tag" value="{{$article->blog_tag}}">
+                        <label>Article Description</label>
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_description')}}*</div>
+                        @endif
+                        <textarea cols="30" rows="15" class="form-control" id="myTextArea" name="article_description"><?php echo preg_replace("'../../'","../../../",($article->article_description)) ;?></textarea>
                     </div>
                     <div class="m-t-20 text-center">
-                        <button class="btn btn-primary submit-btn">Save</button>
+                        <button class="btn btn-primary submit-btn">Publish Article</button>
                     </div>
                 </form>
             </div>

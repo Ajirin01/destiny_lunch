@@ -292,32 +292,26 @@
                                         <div class="col-12 col-lg-12">
                                             <div class="nav">
                                                     <div><a href="{{URL::to('articles/nigerians-at-home-achievers')}}"> Nigerians at Home Achievers</a></div>
-                                                    <div><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers/1')}}"> Nigerians in Diaspora Achievers</a></div>
-                                                    <div><a href="/articles/know-about-nigeria/1">Notable Profiles </a></div>
-                                                    <div><a href="/articles/know-about-nigeria/1"> Regional Updates </a></div>
-                                                    <div class=""><a href="/articles/know-about-nigeria/1">Disapora Updates </a></div>
-                                                    <div><a href="/articles/know-about-nigeria/1"> Global Updates </a></div>
-                                                    <div><a href="/articles/know-about-nigeria/1"> Tribes & Culture </a></div>
-                                                    <div ><a href="/articles/know-about-nigeria/1">Agriculture </a></div>
-                                                    <div ><a href="/articles/know-about-nigeria/1">Mineral Resources</a></div>
-                                                    <div ><a href="/articles/know-about-nigeria/1">Tourism</a></div>
-                                                    <div ><a style="padding: 5px 19px" href="/articles/know-about-nigeria/1">Technology Tips</a></div>
-                                                    <div ><a style="padding: 5px 19px" href="/articles/know-about-nigeria/1">Business Supports</a></div>
-                                                    <div ><a style="padding: 5px 19px" href="/articles/know-about-nigeria/1">Industrial Development</a></div>
-                                                    <div><a style="padding: 5px 17px" href="/articles/know-about-nigeria/1">Made in Nigeria Products </a></div>
-                                                    <div ><a style="padding: 5px 21px" href="/articles/know-about-nigeria/1">Exclusive Services </a></div>
-                                                    <div ><a style="padding: 5px 21px" href="/articles/know-about-nigeria/1">Promotions</a></div>
-                                                    <div><a style="padding: 5px 21px"  href="/articles/know-about-nigeria/1">Invest in Nigeria </a></div>
-                                                    <div><a style="padding: 5px 20px"  href="/articles/know-about-nigeria/1">Not-for-Profits</a></div>
-                                                    <div ><a style="padding: 5px 18px"  href="/articles/know-about-nigeria/1">Humanitarian </a></div>
-                                                    <div ><a href="/articles/know-about-nigeria/1">Destiny Nigeria Development Projects "DNDP initiatives</a></div>
+                                                    <div><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers')}}"> Nigerians in Diaspora Achievers</a></div>
+                                                    <div><a href="{{URL::to('articles/notable-profiles')}}">Notable Profiles </a></div>
+                                                    <div><a href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></div>
+                                                    <div class=""><a href="{{URL::to('articles/disapora-updates')}}">Disapora Updates </a></div>
+                                                    <div><a href="{{URL::to('articles/global-updates')}}"> Global Updates </a></div>
+                                                    <div><a href="{{URL::to('articles/tribes-and-culture')}}"> Tribes & Culture </a></div>
+                                                    <div ><a href="{{URL::to('articles/agriculture')}}">Agriculture </a></div>
+                                                    <div ><a href="{{URL::to('articles/mineral-resources')}}">Mineral Resources</a></div>
+                                                    <div ><a href="{{URL::to('articles/tourism')}}">Tourism</a></div>
+                                                    <div ><a style="padding: 5px 19px" href="{{URL::to('articles/technology-tips')}}">Technology Tips</a></div>
+                                                    <div ><a style="padding: 5px 19px" href="{{URL::to('articles/business-supports')}}">Business Supports</a></div>
+                                                    <div ><a style="padding: 5px 19px" href="{{URL::to('articles/industrial-development')}}">Industrial Development</a></div>
+                                                    <div><a style="padding: 5px 17px" href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></div>
+                                                    <div ><a style="padding: 5px 21px" href="{{URL::to('articles/exclusive-services')}}">Exclusive Services </a></div>
+                                                    <div ><a style="padding: 5px 21px" href="{{URL::to('articles/promotions')}}">Promotions</a></div>
+                                                    <div><a style="padding: 5px 21px"  href="{{URL::to('articles/invest-in-nigeria')}}">Invest in Nigeria </a></div>
+                                                    <div><a style="padding: 5px 20px"  href="{{URL::to('articles/not-for-profits')}}">Not-for-Profits</a></div>
+                                                    <div ><a style="padding: 5px 18px"  href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></div>
+                                                    <div ><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP initiatives</a></div>
                                                     
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
-                                                
                                             </div>
                                         </div>
                                 </div>
@@ -337,9 +331,9 @@
                                             </div>
                                             <div id="breakingNewsTicker" class="ticker">
                                                 <ul>
-                                                    <li><a href="/articles/know-about-nigeria/1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                                                    <li><a href="/articles/know-about-nigeria/1">Welcome to Colorlib Family.</a></li>
-                                                    <li><a href="/articles/know-about-nigeria/1">Nam eu metus sitsit amet, consec!</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Welcome to Colorlib Family.</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Nam eu metus sitsit amet, consec!</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -351,9 +345,9 @@
                                             </div>
                                             <div id="internationalTicker" class="ticker">
                                                 <ul>
-                                                    <li><a href="/articles/know-about-nigeria/1">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                                                    <li><a href="/articles/know-about-nigeria/1">Welcome to Colorlib Family.</a></li>
-                                                    <li><a href="/articles/know-about-nigeria/1">Nam eu metus sitsit amet, consec!</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Welcome to Colorlib Family.</a></li>
+                                                    <li><a href="{{URL::to('articles/')}}">Nam eu metus sitsit amet, consec!</a></li>
                                                 </ul>
                                             </div>
                                         </div>

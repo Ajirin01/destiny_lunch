@@ -83,32 +83,58 @@
                         </li>
                         
                         <li>
+                            
                         <li class="submenu">
                             <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
+                                <li><a href="{{ route('article.create') }}">Add Article</a></li>
                                 <li class="submenu">
                                     <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles List </span> <span class="menu-arrow"></span></a>
                                     <ul style="display: none;">
-                                        <li onclick=" this.children[0].submit();">
-                                            <form id="article-type" action="{{ route('article.index') }}" method="GET">
-                                                <input type="hidden" name="article_type" value="nigerians-at-home-achievers">
-                                            </form>
-                                            <a href="nigerians-at-home-achievers" onclick=" event.preventDefault();">
-                                                Nigerians at Home Achievers
-                                            </a>
-                                        </li>
-                                        <li onclick=" this.children[0].submit();">
-                                            <form  action="{{ route('article.index') }}" method="GET">
-                                                <input type="hidden" name="article_type" value="test-error">
-                                            </form>
-                                            <a href="test-error" onclick=" event.preventDefault();">
-                                                Test error
-                                            </a>
-                                        </li>
-                                        <li><a href="{{ route('article.create') }}">Add Article</a></li>
+                                        <?php
+                                            $article_index = [
+                                            'nigerians-at-home-achievers',
+                                            'nigerians-in-diaspora-achievers',
+                                            'notable-profiles',
+                                            'regional-updates',
+                                            'disapora-updates',
+                                            'global-updates',
+                                            'tribes-and-culture',
+                                            'agriculture',
+                                            'mineral-resources',
+                                            'tourism',
+                                            'technology-tips',
+                                            'business-supports',
+                                            'industrial-development',
+                                            'made-in-nigeria-products',
+                                            'exclusive-services',
+                                            'promotions',
+                                            'invest-in-nigeria',
+                                            'not-for-profits',
+                                            'humanitarian',
+                                            'destiny-nigeria-development-projects-initiatives',
+                                        ];
+                                        function getArticleIndex($article_index, $index){
+                                            $article_at_index = $article_index[$index];
+                                            $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
+                                            $data = array('type'=>$article_at_index, 'title'=>$article_title);
+                                            return $data;
+                                        }
+                                        for($i = 0; $i< count($article_index); $i++){
+                                            echo "
+                                            <li onclick=' this.children[0].submit();'>
+                                                <form action='".route('article.index')."' method='GET'>
+                                                    <input type='hidden' name='article_type' value='".getArticleIndex($article_index, $i)['type']."'>
+                                                </form>
+                                                <a href='".getArticleIndex($article_index, $i)['type']."' onclick=' event.preventDefault();'>
+                                                    ".getArticleIndex($article_index, $i)['title']."
+                                                </a>
+                                            </li>
+                                            ";
+                                        }
+                                        ?>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('article.create') }}">Add Article</a></li>
                             </ul>
                         </li>
                         <li>
