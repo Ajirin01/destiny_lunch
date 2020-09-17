@@ -15,6 +15,13 @@ class ArticlesController extends Controller
         return $articles;
     }
 
+    public function getSingleArticle($article_type, $id){
+        $Articles = new Article;
+        $article = $Articles::where('id',$id)
+                            ->where('article_type',$article_type)->get();
+        return $article;
+    }
+
     public function getArticleIndex($article_index, $index){
         $article_at_index = $article_index[$index];
         $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
@@ -54,7 +61,7 @@ class ArticlesController extends Controller
                     $article_at_index = ArticlesController::getArticleIndex($article_index,$i);
                     $title = ArticlesController::getArticleIndex($article_index,$i)['title'];
                     $articles = ArticlesController::getArticles($type);
-                    return view('site.articles-index',['title'=> $title, 'articles'=> $articles, 'error'=> false, 'upper'=> true, 'lower'=> true]);
+                    return view('site.articles-index',['title'=> $title, 'articles'=> $articles]);
                 }
             }
         }else{
@@ -63,6 +70,43 @@ class ArticlesController extends Controller
     }
 
     public function details($type, $article){
+        $article_index = [
+            'nigerians-at-home-achievers',
+            'nigerians-in-diaspora-achievers',
+            'notable-profiles',
+            'regional-updates',
+            'disapora-updates',
+            'global-updates',
+            'tribes-and-culture',
+            'agriculture',
+            'mineral-resources',
+            'tourism',
+            'technology-tips',
+            'business-supports',
+            'industrial-development',
+            'made-in-nigeria-products',
+            'exclusive-services',
+            'promotions',
+            'invest-in-nigeria',
+            'not-for-profits',
+            'humanitarian',
+            'destiny-nigeria-development-projects-initiatives',
+        ];
+
+        //this next step checks if the article index request is valid. if its valid, the system fetches article correcting to the index
+        //and if not valid, a not found(404) page is returned to the user
+        if(in_array($type, $article_index)){
+            for($i = 0; $i< count($article_index); $i++){
+                if($type == ArticlesController::getArticleIndex($article_index,$i)['type']){
+                    $article_at_index = ArticlesController::getArticleIndex($article_index,$i);
+                    $title = ArticlesController::getArticleIndex($article_index,$i)['title'];
+                    $articles = ArticlesController::getSingleArticle($type,$article);
+                    return view('site.article-details',['title'=> $title, 'article'=> $articles]);
+                }
+            }
+        }else{
+            return view('site.page404');
+        }
         function getArticles($model){
             return $model;
         }
