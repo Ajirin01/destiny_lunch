@@ -1,13 +1,12 @@
 @extends('layouts.site.main_layout')
 @section('upper-content')
     <h3 class="text-center">{{$title}}</h3>
-    @if ($upper)
         <div class="col-12">
             @if (count($articles) > 0)
                 <div class="single-blog-post featured-post col-12">
-                    <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="/storage/uploads/{{$articles[0]->article_intro_image}}" alt=""></a>
+                    <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="/storage/uploads/{{$articles[0]->article_intro_image}}" alt=""></a>
                     <div class="post-data">
-                        <a href="{{URL::to('articles/nigerians-at-home-achievers/'.$articles[0]->id)}}" class="post-title">
+                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
                             <h6>{{$articles[0]->article_title}}</h6> 
                         </a>
                         <div class="post-meta">
@@ -25,7 +24,6 @@
             @endif
             
         </div>
-    @endif
         
     </div>
 </div>

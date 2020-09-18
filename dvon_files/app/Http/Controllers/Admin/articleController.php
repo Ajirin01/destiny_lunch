@@ -92,10 +92,10 @@ class articleController extends Controller
 
         $rules = [
             'article_type'=>'required',
-            'article_title'=> 'required|min:10|max:100',
+            'article_title'=> 'required|min:10|max:20000',
             'article_intro_image'=> 'required',
-            'article_intro'=> 'required|min:100|max:1000',
-            'article_description'=> 'required|min:200|max:5000',
+            'article_intro'=> 'required|min:100|max:20000',
+            'article_description'=> 'required|min:200|max:2000000000',
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -155,8 +155,8 @@ class articleController extends Controller
         $rules = [
             'article_type'=>'required',
             'article_title'=> 'required|min:10|max:100',
-            'article_intro'=> 'required|min:100|max:1000',
-            'article_description'=> 'required|min:200|max:5000',
+            'article_intro'=> 'required|min:100|max:20000',
+            'article_description'=> 'required|min:200|max:2000000000',
         ];
 
         $validator = Validator::make($request->all(), $rules);

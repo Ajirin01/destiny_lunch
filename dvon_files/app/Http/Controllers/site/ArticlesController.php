@@ -61,7 +61,7 @@ class ArticlesController extends Controller
                     $article_at_index = ArticlesController::getArticleIndex($article_index,$i);
                     $title = ArticlesController::getArticleIndex($article_index,$i)['title'];
                     $articles = ArticlesController::getArticles($type);
-                    return view('site.articles-index',['title'=> $title, 'articles'=> $articles]);
+                    return view('site.articles-index',['title'=> $title, 'articles'=> $articles,'article_type'=> $type]);
                 }
             }
         }else{
