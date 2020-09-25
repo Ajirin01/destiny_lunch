@@ -107,8 +107,9 @@ class articleController extends Controller
                 // $image_extension = $image->getClientOriginalExtension();
                 $image_extension = $image->getClientOriginalExtension();
                 $image_name = 'article_intro_image'.rand(123456789,999999999).'.'.$image_extension;
-                // $upload_path = public_path('uploads/');
-                $path = $request->file('article_intro_image')->storeAs('public/uploads', $image_name );
+                $upload_path = public_path('uploads/');
+                $image->move($upload_path, $image_name);
+                // $path = $request->file('article_intro_image')->storeAs('public/uploads', $image_name );
 
                 $article_type = $request->get('article_type');
                 $article_title = $request->get('article_title');
@@ -168,8 +169,10 @@ class articleController extends Controller
                 // $image_extension = $image->getClientOriginalExtension();
                 $image_extension = $image->getClientOriginalExtension();
                 $image_name = 'article_intro_image'.rand(123456789,999999999).'.'.$image_extension;
+                $upload_path = public_path('uploads/');
+                $image->move($upload_path, $image_name);
                 // $upload_path = public_path('uploads/');
-                $path = $request->file('article_intro_image')->storeAs('public/uploads', $image_name );
+                // $path = $request->file('article_intro_image')->storeAs('public/uploads', $image_name );
 
                 $article_type = $request->get('article_type');
                 $article_title = $request->get('article_title');

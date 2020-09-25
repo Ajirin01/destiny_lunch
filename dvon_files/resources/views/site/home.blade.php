@@ -32,14 +32,14 @@
             <div class="single-blog-post featured-post">
                 
                 <div class="post-thumb">
-                    <a href="#"><img src="{{asset('site/img/bg-img/Moj 1.jpg')}}" alt=""></a>
+                    <a href="{{URL::to('articles/'.$random_articles[0]['article_type'].'/'.$random_articles[0]['id'])}}"><img style="width: 100%; height: 500px" src="/dvon_files/public/uploads/{{$random_articles[0]['article_intro_image']}}" alt=""></a>
                 </div>
                 <div class="post-data">
-                    <h4>There is Great Hope for Nigeria</h4>
+                    <h4>{{$random_articles[0]['article_title']}}</h4>
                     <div class="post-meta">
                         <p class="post-author">
                             <a class="text-danger" href="#">
-                                … Read Interview With Mrs Moji Okonkwo…
+                                … Read Interview …
                             </a>
                         </p>
                     </div>
@@ -61,78 +61,50 @@
 
                 <div class="row">
                     <!-- Single Post -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-3">
-                            <h5 class="text-center">
-                                LOVE FROM DIASPORA …
-                            </h5>
-                            <br>
-                            <div class="post-thumb">
-                                <a href="#"><img src="{{asset('site/img/bg-img/akeem usa.jpg')}}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-3">
-                            <div class="post-data">
-                                <br><br>
-                                <h4>MEET AKEEM:</h4>
-                                <h6>“…. Nigerians have the brains…”</h6>
-                                <p class="text-left">
-                                    Due to high security nature of his job, Destiny Nigeria’s
-                                    Voice could not publish an exclusive interview with
-                                    another ardent lover of Nigeria, based in far away
-                                    United States of America.
-                                </p>
-                                <p class="text-left">
-                                    We however have the rare privilege of presenting a
-                                    summary of the story of the man who simply prefers to
-                                    be called: “Akeem”.
-                                </p>
-                                
-                                <p class="post-author">
-                                    <a class="text-danger" href="#">
-                                        … Read Akeem’s Story here…
-                                    </a>
-                                </p>
-                                <div class="align-items-center">
-                                    <a href="#" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
-                                    <a href="#" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+                    @foreach ($random_articles as $key => $article)
+                        @if ($key > 0)
+                            <div class="col-12 col-md-6">
+                                <div class="single-blog-post style-3">
+                                    {{-- <h5 class="text-center">
+                                        LOVE FROM DIASPORA …
+                                    </h5> --}}
+                                    {{-- <br> --}}
+                                    <div class="post-thumb">
+                                        <div class="single-blog-post featured-post mb-30">
+                                            <div >
+                                                <a href="{{URL::to('articles/'.$article['article_type'].'/'.$article['id'])}}"><img style="width: 100%; height: 500px" src="/dvon_files/public/uploads/{{$article['article_intro_image']}}" alt=""></a>
+                                            </div>
+                                        </div> 
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-3">
-                            <div class="post-thumb">
-                                <a href="#"><img src="{{asset('site/img/bg-img/happy 60years.jpg')}}" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Single Post -->
-                    <div class="col-12 col-md-6">
-                        <div class="single-blog-post style-3">
-                            <div class="post-data">
-                                <h4> HAPPY 6O YEARS OF INDEPENDENCE TO NIGERIA </h4>
-                                <h4> 1st October 1960 to 1st October 2020 </h4>
-                                <h6> EDITORIAL: Nigeria at 60; What Next?</h6>
-                                <p class="post-author">
-                                    <a class="text-danger" href="#">
-                                        .… Read Article here …
-                                    </a>
-                                </p>
-                                <div class="post-meta d-flex align-items-center">
-                                    <a href="#" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
-                                    <a href="#" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+                            <!-- Single Post -->
+                            <div class="col-12 col-md-6">
+                                <div class="single-blog-post style-3">
+                                    <div class="post-data">
+                                        {{-- <br><br> --}}
+                                        <h4>{{$article['article_title']}}:</h4>
+                                        <div class="text-left" style="word-break: break-word">
+                                            <?php echo substr($article['article_intro'],0,500)?>...
+                                        </div>
+                                        
+                                        {{-- {{$article['article_intro']}} --}}
+                                        <p class="post-author">
+                                            <a class="text-danger" href="{{URL::to('articles/'.$article['article_type'].'/'.$article['id'])}}">
+                                                … Read Story here…
+                                            </a>
+                                        </p>
+                                        <div class="align-items-center">
+                                            <a href="#" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
+                                            <a href="#" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        @endif
+                                            
+                    @endforeach
+
                 </div>
             </div>
             <div class="col-12 col-lg-4">
@@ -142,38 +114,15 @@
                 <!-- Popular News Widget -->
                 <div class="popular-news-widget mb-30">
                     <h3>4 Most Recent Updates</h3>
-
-                    <!-- Single Popular Blog -->
-                    <div class="single-popular-post">
-                        <a href="#">
-                            <h6><span>1.</span> Amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales.</h6>
-                        </a>
-                        <p>April 14, 2018</p>
-                    </div>
-
-                    <!-- Single Popular Blog -->
-                    <div class="single-popular-post">
-                        <a href="#">
-                            <h6><span>2.</span> Consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer.</h6>
-                        </a>
-                        <p>April 14, 2018</p>
-                    </div>
-
-                    <!-- Single Popular Blog -->
-                    <div class="single-popular-post">
-                        <a href="#">
-                            <h6><span>3.</span> Adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo.</h6>
-                        </a>
-                        <p>April 14, 2018</p>
-                    </div>
-
-                    <!-- Single Popular Blog -->
-                    <div class="single-popular-post">
-                        <a href="#">
-                            <h6><span>4.</span> Eu metus sit amet odio sodales placer. Sed varius leo ac...</h6>
-                        </a>
-                        <p>April 14, 2018</p>
-                    </div>
+                    @foreach ($latest_articles as $key => $latest)
+                        <!-- Single Popular Blog -->
+                        <div class="single-popular-post">
+                            <a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">
+                            <h6><span>{{$key + 1}}.</span> {{$latest['article_title']}}</h6>
+                            </a>
+                            {{-- <p>{{$latest['created_at']->diffforHumans()}}</p> --}}
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- Newsletter Widget -->

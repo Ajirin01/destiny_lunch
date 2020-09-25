@@ -64,9 +64,7 @@
                 </div>
 
                 <div>
-                    <input type="hidden" name="firstname" value="{{Session::get('firstname')}}">
-                    <input type="hidden" name="lastname" value="{{Session::get('lastname')}}">
-                    <input type="hidden" name="address" value="{{Session::get('address')}}">
+                    <input type="hidden" name="fullname" value="{{Session::get('fullname')}}">
                     <input type="hidden" name="country" value="{{Session::get('country')}}">
                     <input type="hidden" name="phone" value="{{Session::get('phone')}}">
                 </div>

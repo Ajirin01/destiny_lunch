@@ -2,18 +2,14 @@
 use Illuminate\Http\Request;
 use App\country as Country;
 
-Route::get('/', function () {
-    return view('site.home');
-});
+// Route::get('/', function () {
+//     return view('site.home');
+// });
+Route::get('/', 'HomeController@index');
 
 Route::post('/register-next', function(Request $request){
-    $Country = new Country;
-    $single_country = $Country::where('country_code', $request->country)->first();
-
-    Session::put('firstname', $request->firstname);
-    Session::put('lastname', $request->lastname);
-    Session::put('address', $request->address);
-    Session::put('country', $single_country->country_name);
+    Session::put('fullname', $request->fullname);
+    Session::put('country', $request->country_name);
     Session::put('phone', $request->phone);
     return view('auth.register-next');
 })->name('next');

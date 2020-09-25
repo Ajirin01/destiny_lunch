@@ -173,7 +173,7 @@
                                                 <li><a href="catagories-post.html">Career Development</a></li>
                                                 <li><a href="">Entertainment</a></li>
                                                 <li><a href="/">Sports</a></li>
-                                                <li><a href="single-post.html">"DNDP" Initatives</a></li>
+                                                <li><a href="single-post.html">"DNDP" Initiatives</a></li>
                                                 <li><a href="about.html">Place Your Adverts</a></li>
                                             </ul>
                                         </div>
@@ -270,7 +270,7 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                            <a href="/articles/DNDP-initatives" class="post-catagory">"DNDP" Initatives</a>
+                            <a href="/articles/DNDP-Initiatives" class="post-catagory">"DNDP" Initiatives</a>
                         </div>
                     </div>
                     <!-- Single Featured Post -->
@@ -331,9 +331,9 @@
                                             </div>
                                             <div id="breakingNewsTicker" class="ticker">
                                                 <ul>
-                                                    <li><a href="{{URL::to('articles/')}}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                                                    <li><a href="{{URL::to('articles/')}}">Welcome to Colorlib Family.</a></li>
-                                                    <li><a href="{{URL::to('articles/')}}">Nam eu metus sitsit amet, consec!</a></li>
+                                                    @foreach ($latest_articles as $latest)
+                                                        <li><a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">{{$latest['article_title']}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -345,9 +345,9 @@
                                             </div>
                                             <div id="internationalTicker" class="ticker">
                                                 <ul>
-                                                    <li><a href="{{URL::to('articles/')}}">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</a></li>
-                                                    <li><a href="{{URL::to('articles/')}}">Welcome to Colorlib Family.</a></li>
-                                                    <li><a href="{{URL::to('articles/')}}">Nam eu metus sitsit amet, consec!</a></li>
+                                                    @foreach ($random_articles as $random)
+                                                        <li><a href="{{URL::to('articles/'.$random['article_type'].'/'.$random['id'])}}">{{$random['article_title']}}</a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -441,7 +441,7 @@
                                 <li><a href="#">Family & Parenting</a></li>
                                 <li><a href="#">Career Development</a></li>
                                 <li><a href="#">Business Development</a></li>
-                                <li><a href="#">"DNDP" Initatives</a></li>
+                                <li><a href="#">"DNDP" Initiatives</a></li>
                             </ul>
                         </div>
                     </div>
@@ -458,9 +458,6 @@
                                 <li><a href="#">Instagram</a></li>
                                 <li><a href="#">Linkedin</a></li>
                                 <li><a href="#">Google+</a></li>
-                                {{-- <li><a href="#">Food/Drink</a></li>
-                                <li><a href="#">Hotels</a></li>
-                                <li><a href="#">Partner Hotels</a></li> --}}
                             </ul>
                         </div>
                     </div>
