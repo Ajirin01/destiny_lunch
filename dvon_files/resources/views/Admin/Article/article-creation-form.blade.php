@@ -25,7 +25,7 @@
             <form action="{{ route('article.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label>Article Title</label>
+                    <label>Article Section</label>
                     @if(session('errors'))
                     <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>
                     @endif

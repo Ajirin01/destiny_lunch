@@ -17,7 +17,7 @@
                 </h4>
             </div>
             <div class="col-lg-9 offset-lg-1">
-                <h4 class="page-title">Add Article</h4>
+                <h4 class="page-title">Edit Article</h4>
             </div>
         </div>
         <div class="row">
@@ -26,7 +26,7 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label>Article Title</label>
+                        <label>Article Section</label>
                         @if(session('errors'))
                         <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>
                         @endif
