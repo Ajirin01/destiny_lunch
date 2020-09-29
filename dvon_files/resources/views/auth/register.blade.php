@@ -16,7 +16,7 @@
                 <img src="{{asset('auth/images/img-01.png')}}" alt="IMG">
             </div>
 
-            <form class="login100-form validate-form" method="POST" action="{{ route('next') }}">
+            <form class="login100-form validate-form" method="GET" action="{{ route('next') }}">
                 @csrf
                 <span class="login100-form-title">
                     {{ __('Register') }}

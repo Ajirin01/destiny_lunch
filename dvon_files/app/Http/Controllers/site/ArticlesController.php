@@ -30,28 +30,9 @@ class ArticlesController extends Controller
     }
     
     public function index($type){
-        $article_index = [
-            'nigerians-at-home-achievers',
-            'nigerians-in-diaspora-achievers',
-            'notable-profiles',
-            'regional-updates',
-            'disapora-updates',
-            'global-updates',
-            'tribes-and-culture',
-            'agriculture',
-            'mineral-resources',
-            'tourism',
-            'technology-tips',
-            'business-supports',
-            'industrial-development',
-            'made-in-nigeria-products',
-            'exclusive-services',
-            'promotions',
-            'invest-in-nigeria',
-            'not-for-profits',
-            'humanitarian',
-            'destiny-nigeria-development-projects-initiatives',
-        ];
+        define("filenameA", "article_index.json");
+        $json = file_get_contents(filenameA);
+        $article_index = json_decode($json);
 
         //this next step checks if the article index request is valid. if its valid, the system fetches article correcting to the index
         //and if not valid, a not found(404) page is returned to the user
@@ -70,28 +51,9 @@ class ArticlesController extends Controller
     }
 
     public function details($type, $article){
-        $article_index = [
-            'nigerians-at-home-achievers',
-            'nigerians-in-diaspora-achievers',
-            'notable-profiles',
-            'regional-updates',
-            'disapora-updates',
-            'global-updates',
-            'tribes-and-culture',
-            'agriculture',
-            'mineral-resources',
-            'tourism',
-            'technology-tips',
-            'business-supports',
-            'industrial-development',
-            'made-in-nigeria-products',
-            'exclusive-services',
-            'promotions',
-            'invest-in-nigeria',
-            'not-for-profits',
-            'humanitarian',
-            'destiny-nigeria-development-projects-initiatives',
-        ];
+        define("filenameA", "article_index.json");
+        $json = file_get_contents(filenameA);
+        $article_index = json_decode($json);
 
         //this next step checks if the article index request is valid. if its valid, the system fetches article correcting to the index
         //and if not valid, a not found(404) page is returned to the user

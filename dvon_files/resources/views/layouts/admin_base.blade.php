@@ -76,6 +76,9 @@
                             <a href="{{ route('country.index') }}"><i class="fa fa-group"></i> <span>Countries</span></a>
                         </li>
                         <li>
+                            <a href="{{ route('external_links.index') }}"><i class="fa fa-group"></i> <span>External links</span></a>
+                        </li>
+                        <li>
                             <a href="{{ route('users.index') }}"><i class="fa fa-group"></i> <span>Users</span></a>
                         </li>
                         <li>

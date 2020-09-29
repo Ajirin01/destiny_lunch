@@ -1,53 +1,6 @@
 <?php
-    function getArticlesIndex($article_index, $index){
-        $article_at_index = $article_index[$index];
-        $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
-        $data = array('type'=>$article_at_index, 'title'=>$article_title);
-        return $data;
-    }
-    $article_index = [
-            'nigerians-at-home-achievers',
-            'nigerians-in-diaspora-achievers',
-            'notable-profiles',
-            'regional-updates',
-            'disapora-updates',
-            'global-updates',
-            'tribes-and-culture',
-            'agriculture',
-            'mineral-resources',
-            'tourism',
-            'technology-tips',
-            'business-supports',
-            'industrial-development',
-            'made-in-nigeria-products',
-            'exclusive-services',
-            'promotions',
-            'invest-in-nigeria',
-            'not-for-profits',
-            'humanitarian',
-            'destiny-nigeria-development-projects-initiatives',
-        ];
-        $Articles = new App\Article();
-        $random_articles = array();
-        $latest_articles = array();
-        for($i = 0; $i< count($article_index); $i++){
-            $article_at_index = getArticlesIndex($article_index,$i);
-            $articles = $Articles::where('article_type', $article_at_index['type'])->inRandomOrder()->first();
-            $articles = json_decode($articles, true);
-            if($articles != null){
-                array_push($random_articles,$articles);
-            }
-            
-        }
-        for($i = 0; $i< count($article_index); $i++){
-            $article_at_index = getArticlesIndex($article_index,$i);
-            $articles = $Articles::where('article_type', $article_at_index['type'])->latest()->first();
-            $articles = json_decode($articles, true);
-            if($articles != null){
-                array_push($latest_articles,$articles);
-            }
-            
-        }
+    include('includes/get_random_latest.php');
+    include('includes/visitor_counter.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +44,7 @@
                                             left: 27%;
                                             font-size: 2rem;
                                             font-weight: 100;
-                                            ">...... the authentic global voice for  <i  style="font-family: Monotype Corsiva; font-weight: 800; color: #24e600">N</i>igeria ......</div>
+                                            ">... the authentic global voice for  <i  style="font-family: Monotype Corsiva; font-weight: 800; color: #24e600">N</i>igeria ...</div>
                                     </div>
                                 </a>
                             </div>
@@ -100,6 +53,7 @@
                             <div class="login-search-area d-flex align-items-center">
                                 <!-- Login -->
                                 <div class="login d-flex">
+                                <span style="color: white; text-align: center" >Visitors <br>{{$total_visitors}}</span>
                                     @guest
                                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                         @if (Route::has('register'))
@@ -541,8 +495,8 @@
                     <div class="col-12">
                         <!-- Copywrite -->
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i></a>
-    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     </div>
                 </div>
             </div>
