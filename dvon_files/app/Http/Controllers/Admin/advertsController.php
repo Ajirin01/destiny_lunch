@@ -18,8 +18,10 @@ class advertsController extends Controller
     public function index()
     {
         $Advert = new Advert;
-        $all_adverts = Advert::paginate(10);
-       return view('Admin.Adverts.adverts-dashboard', ['adverts' => $all_adverts]);
+        $all_adverts = Advert::paginate(9);
+        // return response()->json($all_adverts);
+        // exit;
+        return view('Admin.Adverts.adverts-dashboard', ['adverts' => $all_adverts]);
     }
 
     public function create()
@@ -29,35 +31,38 @@ class advertsController extends Controller
 
     public function store(Request $request)
     {
+        // return response()->json($request->file('advert_image'));
+        // exit;
         $Advert = new Advert;
         $rules = [
-            'advert_title' => 'required|min:5|max:50',
-            'advert_image' => 'required',
-            'advert_description' => 'required|min:20|max:200'
+            'advert_image' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
+
+        $upload_path = public_path('uploads/');
+        $created = false;
 
         if($validator->fails()){
             return redirect()->back()->with('errors',$validator->errors());
         }else {
             if($request->hasFile('advert_image')){
                 $image = $request->file('advert_image');
-                $image_extension = $image->getClientOriginalExtension();
-                $image_name = 'advert_image'.rand(123456789,999999999).'.'.$image_extension;
-                $path = $request->file('advert_image')->storeAs('public/uploads', $image_name );
-    
-                $advert_title = $request->get('advert_title');
-                $advert_description = $request->get('advert_description');
-                $advert_image = $image_name;
-                $create_advert = Advert::create(['advert_title'=>$advert_title,
-                 'advert_description'=>$advert_description,
-                 'advert_image'=>$advert_image]);
-    
-                if($create_advert->save()){
-                    return redirect()->back()->with('msg','advert was successfully created!');
+                for($i=0; $i < count($image); $i++){
+                    $image_extension = $image[$i]->getClientOriginalExtension();
+                    $image_name[$i] = 'advert_image'.rand(123456789,999999999).'.'.$image_extension;
+
+                    $advert_image = "/dvon_files/public/uploads/".$image_name[$i];
+                    $create_advert = Advert::create(['advert'=>$advert_image]);
+                    $image[$i]->move($upload_path, $image_name[$i]);
+                    if($create_advert){
+                        $created = true;
+                    }
+                }
+                if($created){
+                    return redirect()->back()->with('msg','advert(s) was successfully created!');
                 }
             }else{
-                return redirect()->back()->with('error','ERROR! could not create advert!');
+                return redirect()->back()->with('error','ERROR! could not create advert(s)!');
             }
         }
 
@@ -111,7 +116,7 @@ class advertsController extends Controller
     public function destroy($id)
     {
         $Advert = new Advert;
-        $advert = Advert::firstOrFail('id',$id);
+        $advert = Advert::find($id);
         $delete_advert = $advert->delete();
         if($delete_advert){
             return redirect()->back()->with('msg','post was successfully deleted!');

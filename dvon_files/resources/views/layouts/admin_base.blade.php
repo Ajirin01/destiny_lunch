@@ -72,9 +72,9 @@
                         <li class="active">
                             <a href="{{ url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('country.index') }}"><i class="fa fa-group"></i> <span>Countries</span></a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('external_links.index') }}"><i class="fa fa-group"></i> <span>External links</span></a>
                         </li>

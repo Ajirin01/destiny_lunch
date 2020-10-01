@@ -34,14 +34,19 @@
                         <div class="article-info clearfix">
                             <div class="article-left">
                                 <a class="dropdown-item" href="{{ url('admin/article/'.$article->id.'/edit') }}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                                <a data-toggle="modal" class="dropdown-item" data-target="#delete_department" href="{{ url('admin/article/'.$article->id.'/') }}"
-                                    onclick="event.preventDefault();"><i class="fa fa-trash-o m-r-5"></i>
-                                    {{ __('delete') }}
-                                </a>
-
-                                <form id="delete-form" action="{{ url('admin/article/'.$article->id.'/') }}" method="POST" style="display: none;">
+                                <form class="dropdown-item" id="delete-form" action="{{ url('admin/article/'.$article->id.'/') }}" method="POST" style="color: red; cursor: pointer">
                                     @csrf
                                     @method('DELETE')
+                                    <i class="fa fa-trash-o m-r-5"></i>
+                                    <input style="background: transparent; border: none; color: red; cursor: pointer" type="submit" value="Delete" onclick="
+                                        event.stopPropagation()
+                                        var next = confirm('are you sure you want to delete this record?')
+                                        if(next){
+                                            //
+                                        }else{
+                                           event.preventDefault()
+                                        }
+                                    ">
                                 </form>
                             </div>
                         </div>

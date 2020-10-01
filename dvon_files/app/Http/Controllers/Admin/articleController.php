@@ -145,7 +145,7 @@ class articleController extends Controller
         if($validator->fails()){
             return redirect()->back()->with('errors',$validator->errors());
         }else{
-            if($request->hasFile('article_image')){
+            if($request->hasFile('article_intro_image')){
                 $image = $request->file('article_intro_image');
                 // $image_extension = $image->getClientOriginalExtension();
                 $image_extension = $image->getClientOriginalExtension();
@@ -198,7 +198,7 @@ class articleController extends Controller
     public function destroy($id)
     {
         $Article = new Article;
-        $article = Article::firstOrFail('id',$id);
+        $article = Article::find($id);
         $delete_article = $article->delete();
         if($delete_article){
             Storage::delete('public/uploads/'.$article->article_image);
