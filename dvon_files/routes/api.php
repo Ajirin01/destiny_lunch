@@ -6,6 +6,39 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('like/{id}', function(Request $request, $id){
+    $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "http://destiny.com");
+
+    if(isset($_SERVER['HTTP_ORIGIN'])){
+        if(in_array($_SERVER['HTTP_ORIGIN'], $accepted_origin)){
+            header('Access-Control-Allow-Origin' . $_SERVER['HTTP_ORIGIN']);
+        }else{
+            header('HTTP/1.1 403 Origin Denied');
+            return;
+        }
+    }
+
+    $article_id = $id;
+    $user_id = $request->id;
+    
+    $user = App\User::find($user_id);
+    $article = App\Article::find($article_id);
+    $find_like = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
+
+    if(count($find_like)>0){
+        App\Like::where('user_id',$user_id)->where('article_id',$article_id)->delete();
+        echo json_encode("unliked");
+    }else{
+        $like = new App\Like(['like'=>1, 'status'=>'active', 'user_id'=>$user_id]);
+        $save_like = $article->likes()->save($like);
+        if($save_like){
+            echo json_encode(["msg"=>"success"]);
+        }else{
+            echo json_encode(["msg"=>"failure"]);
+        }
+    }
+});
+
 Route::post('/upload-tinymce', function(Request $request){
     $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "http://destiny.com");
     

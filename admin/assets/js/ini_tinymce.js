@@ -1,8 +1,8 @@
 tinymce.init({
 	selector: '#myTextArea' ,
-    plugins: 'image imagetools textcolor colorpicker textpattern table print preview',
-    toolbar1:'insertfole undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist nullist outdent indent | image ',
-    toolbar2:'print preview media | forecolor backcolor fontselect',
+    plugins: 'image imagetools textcolor colorpicker textpattern table print preview link wordcount lists',
+    toolbar1:'insertfole undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image ',
+    toolbar2:'print preview link | forecolor backcolor fontselect',
     indent_use_margin: true,
     height: '400',
     images_upload_url: config.routes.tiny_url,

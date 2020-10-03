@@ -13,4 +13,11 @@ class Article extends Model
         'article_intro',
         'article_description'
     ];
+
+    public function likes(){
+        return $this->hasMany('App\Like');
+    }
+    public function comments(){
+        return $this->hasMany('App\ArticleComment');
+    }
 }

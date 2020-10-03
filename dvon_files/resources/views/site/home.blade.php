@@ -99,7 +99,7 @@
                                                 </a>
                                             </p>
                                             <div class="align-items-center">
-                                                <a href="#" class="post-like"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
+                                                <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
                                                 <a href="#" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
                                             </div>
                                         </div>
@@ -163,4 +163,52 @@
     </div>
 </div>
 <!-- ##### Video Post Area End ##### -->
+@if (Auth::user())
+<script>
+    var like_btn = document.getElementById('like-btn')
+
+    like_btn.onclick = (e) => {
+        e.preventDefault()
+        var user_id = "{{Auth::user()->id}}"
+        var url = like_btn.href
+
+        var xhr, formData;
+
+        xhr = new XMLHttpRequest();
+        xhr.withCredentials = false;
+        xhr.open('POST', url);
+
+        xhr.onload = function(){
+            var json;
+
+            if(xhr.status != 200){
+                console.log('HTTP Error:' + xhr.status);
+                return;
+            }
+            json = JSON.parse(xhr.responseText);
+
+            if(!json || typeof json.location != 'string'){
+                console.log('Invalid Json:' + xhr.responseText);
+                return;
+            }
+            console.log(xhr.responseText)
+        };
+
+        formData = new FormData();
+        formData.append('id', user_id);
+
+        xhr.send(formData);
+    }
+</script>
+@else
+<script>
+    var like_btn = document.getElementById('like-btn')
+
+    like_btn.onclick = (e) => {
+        e.preventDefault()
+        alert('Ops!, You can not like article because you are not logged in. Please Login or Register to like article.')
+    }
+</script>
+@endif
+
 @endsection

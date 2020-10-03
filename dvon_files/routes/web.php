@@ -21,13 +21,16 @@ Route::get('/foo', function(){
 Route::prefix('admin')->group(function(){
         Route::get('dashboard', 'Admin\dashboardController@dashboard');
         Route::get('calender', 'Admin\calendarController@showCalender');
+        Route::get('comments', 'Admin\UserActionToArticle@comments_index');
+        Route::post('delete_comment/{comment_id}', 'Admin\UserActionToArticle@delete_comment');
+        Route::post('update_comment_status/{comment_id}', 'Admin\UserActionToArticle@update_comment_status');
         Route::resource('adverts', 'Admin\advertsController');
         Route::resource('users', 'Admin\usersController')->middleware('admin');
         Route::resource('country', 'Admin\countriesController');
         Route::resource('external_links', 'Admin\linksController');
         Route::resource('blog', 'Admin\blogController')->middleware('admin');
         Route::resource('article', 'Admin\articleController');
-    Route::resource('profile', 'Admin\profileController')->middleware('admin');
+        Route::resource('profile', 'Admin\profileController')->middleware('admin');
 }); 
 
 Route::get('/home', function () {
