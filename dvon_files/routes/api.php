@@ -24,17 +24,23 @@ Route::post('like/{id}', function(Request $request, $id){
     $user = App\User::find($user_id);
     $article = App\Article::find($article_id);
     $find_like = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
+    $all_likes = App\Like::where('article_id',$article_id)->get();
+    $total_number_likes = count($all_likes);
 
     if(count($find_like)>0){
+        $new_total_number_likes = $total_number_likes - 1;
         App\Like::where('user_id',$user_id)->where('article_id',$article_id)->delete();
-        echo json_encode("unliked");
+        echo json_encode(array('msg'=>'unliked', 'likes'=> $new_total_number_likes));
     }else{
         $like = new App\Like(['like'=>1, 'status'=>'active', 'user_id'=>$user_id]);
         $save_like = $article->likes()->save($like);
         if($save_like){
-            echo json_encode(["msg"=>"success"]);
+            $all_likes = App\Like::where('article_id',$article_id)->get();
+            $total_number_likes = count($all_likes);
+            $new_total_number_likes = $total_number_likes;
+            echo json_encode(array('msg'=>'liked', 'likes'=> $new_total_number_likes));
         }else{
-            echo json_encode(["msg"=>"failure"]);
+            echo json_encode(array('msg'=>'failure'));
         }
     }
 });

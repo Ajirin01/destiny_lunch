@@ -13,11 +13,6 @@ Route::get('/register-next', function(Request $request){
 
 Auth::routes();
 
-Route::get('/foo', function(){
-    // Artisan::call('storage:link');
-    File::link(storage_path('app/public'), public_path('storage'));
-});
-
 Route::prefix('admin')->group(function(){
         Route::get('dashboard', 'Admin\dashboardController@dashboard');
         Route::get('calender', 'Admin\calendarController@showCalender');
@@ -33,17 +28,19 @@ Route::prefix('admin')->group(function(){
         Route::resource('profile', 'Admin\profileController')->middleware('admin');
 }); 
 
+
 Route::get('/home', function () {
     return redirect('/');
 })->name('home');
 
 Route::get('/about', function () {
     return view('site.about',['title'=> 'ABOUT US']);
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::prefix('articles')->group(function () {
     Route::get('/{type}',	'site\ArticlesController@index')->name('articles-list');
     Route::get('/{type}/{article}',	'site\ArticlesController@details')->name('articles-details'); 
+    Route::post('/{type}/{article}/comment', 'site\ArticlesController@postComment')->middleware('auth');
 }); 
 
 

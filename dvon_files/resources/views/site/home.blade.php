@@ -99,8 +99,59 @@
                                                 </a>
                                             </p>
                                             <div class="align-items-center">
-                                                <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn"><img src="{{asset('site/img/core-img/like.png')}}" alt=""> <span>392</span></a>
-                                                <a href="#" class="post-comment"><img src="{{asset('site/img/core-img/chat.png')}}" alt=""> <span>10</span></a>
+                                                @php
+                                                    function getLikes($article_id){
+                                                        $likes = App\Like::where('article_id',$article_id)->get();
+                                                        return count($likes);
+                                                    }
+
+                                                    function getComments($article_id){
+                                                        $comments = App\ArticleComment::where('article_id',$article_id)->get();
+                                                        return count($comments);
+                                                    }
+
+                                                    function getLikeUser($article_id, $user_id){
+                                                        $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
+                                                        return count($likes);
+                                                    }
+
+                                                    function getCommentUser($article_id, $user_id){
+                                                        $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
+                                                        return count($likes);
+                                                    }
+
+                                                @endphp
+                                                <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn">
+                                                    @if (Auth::user())
+                                                        @if (getLikeUser($article['id'], Auth::user()->id)>0)
+                                                            <i style="color: red" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                        @else
+                                                            <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                        @endif
+                                                    @else
+                                                        <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                    @endif
+                                                    <span id="likes">
+                                                        @php
+                                                            echo getLikes($article['id']);
+                                                        @endphp
+                                                    </span>
+                                                </a>
+                                                <a href="{{URL::to('articles/'.$article['article_type'].'/'.$article['id'])}}" class="post-comment">
+                                                    @if (Auth::user())
+                                                        @if (getCommentUser($article['id'], Auth::user()->id)>0)
+                                                            <i style="color: red" id="comment-icon" class="fa fa-comments"></i>
+                                                        @else
+                                                            <i style="color: gray" id="comment-icon" class="fa fa-comments"></i>
+                                                        @endif
+                                                    @else
+                                                        <i style="color: gray" id="comment-icon" class="fa fa-comments"></i>
+                                                    @endif
+                                                    <span id="likes">
+                                                        @php
+                                                            echo getComments($article['id']);
+                                                        @endphp
+                                                    </span>
                                             </div>
                                         </div>
                                     </div>
@@ -165,7 +216,9 @@
 <!-- ##### Video Post Area End ##### -->
 @if (Auth::user())
 <script>
-    var like_btn = document.getElementById('like-btn')
+    var like_btn = document.getElementById('like-btn');
+    var like_icon = document.getElementById('like-icon');
+    var likes_container = document.getElementById('likes');
 
     like_btn.onclick = (e) => {
         e.preventDefault()
@@ -185,13 +238,25 @@
                 console.log('HTTP Error:' + xhr.status);
                 return;
             }
+
             json = JSON.parse(xhr.responseText);
 
-            if(!json || typeof json.location != 'string'){
-                console.log('Invalid Json:' + xhr.responseText);
-                return;
-            }
-            console.log(xhr.responseText)
+            var res = xhr.responseText;
+            var msg = JSON.parse(res).msg;
+            var likes = JSON.parse(res).likes;
+
+                if(msg === "liked"){
+                    like_icon.style.color = "red";
+                    console.log(likes);
+                    likes_container.innerText = likes;
+                }else if(msg === "unliked"){
+                    like_icon.style.color = "gray";
+                    console.log(likes);
+                    likes_container.innerText = likes;
+                }else if(msg === "failure"){
+                    alert("Internal error has occurred!");
+                }
+            
         };
 
         formData = new FormData();
