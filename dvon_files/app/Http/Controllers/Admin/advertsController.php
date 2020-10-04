@@ -19,8 +19,6 @@ class advertsController extends Controller
     {
         $Advert = new Advert;
         $all_adverts = Advert::paginate(9);
-        // return response()->json($all_adverts);
-        // exit;
         return view('Admin.Adverts.adverts-dashboard', ['adverts' => $all_adverts]);
     }
 
@@ -31,11 +29,10 @@ class advertsController extends Controller
 
     public function store(Request $request)
     {
-        // return response()->json($request->file('advert_image'));
-        // exit;
         $Advert = new Advert;
         $rules = [
-            'advert_image' => 'required'
+            'advert_image' => 'required',
+            'pages' => 'required',
         ];
         $validator = Validator::make($request->all(),$rules);
 
@@ -47,12 +44,13 @@ class advertsController extends Controller
         }else {
             if($request->hasFile('advert_image')){
                 $image = $request->file('advert_image');
+                $pages = $request->pages;
                 for($i=0; $i < count($image); $i++){
                     $image_extension = $image[$i]->getClientOriginalExtension();
                     $image_name[$i] = 'advert_image'.rand(123456789,999999999).'.'.$image_extension;
 
                     $advert_image = "/dvon_files/public/uploads/".$image_name[$i];
-                    $create_advert = Advert::create(['advert'=>$advert_image]);
+                    $create_advert = Advert::create(['advert'=>$advert_image, 'pages'=> $pages[$i], 'status'=> 'active', 'expired'=> 'no']);
                     $image[$i]->move($upload_path, $image_name[$i]);
                     if($create_advert){
                         $created = true;
@@ -73,21 +71,25 @@ class advertsController extends Controller
     public function edit($id)
     {
         $Advert = new Advert;
-        $advert = Advert::findOrFail($id);
+        $advert = Advert::find($id);
         return view('Admin.Adverts.edit-advert', ['advert'=> $advert]);
     }
 
     public function update(Request $request, $id)
     {
+        $pages = $request->pages;
+        $status = $request->status;
+        $expired = $request->expired;
+
         $Advert = new Advert;
-        $Advert = Advert::findOrFail($id);
+        $advert = Advert::find($id);
+
         $rules = [
-            'advert_title' => 'required|min:5|max:50',
-            'advert_image' => 'required',
-            'advert_description' => 'required|min:20|max:100'
+            'pages' => 'required',
+            'status' => 'required'
         ];
         $validator = Validator::make($request->all(),$rules);
-
+        
         if($validator->fails()){
             return redirect()->back()->with('errors',$validator->errors());
         }else {
@@ -95,20 +97,18 @@ class advertsController extends Controller
                 $image = $request->file('advert_image');
                 $image_extension = $image->getClientOriginalExtension();
                 $image_name = 'advert_image'.rand(123456789,999999999).'.'.$image_extension;
-                $path = $request->file('advert_image')->storeAs('public/uploads', $image_name );
+
+                $advert_image = "/dvon_files/public/uploads/".$image_name;
+                $update_advert = $advert->update(['advert'=>$advert_image, 'pages'=> $pages, 'status'=> $status, 'expired'=> $expired]);
+                $image->move($upload_path, $image_name);
     
-                $advert_title = $request->get('advert_title');
-                $advert_description = $request->get('advert_description');
-                $advert_image = $image_name;
-                $create_advert = $Advert->update(['advert_title'=>$advert_title,
-                 'advert_description'=>$advert_description,
-                 'advert_image'=>$advert_image]);
-    
-                if($create_advert){
+                if($update_advert){
                     return redirect()->back()->with('msg','advert was successfully Updated!');
                 }
             }else{
-                return redirect()->back()->with('error','ERROR! could not update advert!');
+                $advert_image = $advert->advert;
+                $update_advert = $advert->update(['advert'=>$advert_image, 'pages'=> $pages, 'status'=> $status, 'expired'=> $expired]);
+                return redirect()->back()->with('msg','advert was successfully Updated!');
             }
         }
     }
@@ -119,7 +119,7 @@ class advertsController extends Controller
         $advert = Advert::find($id);
         $delete_advert = $advert->delete();
         if($delete_advert){
-            return redirect()->back()->with('msg','post was successfully deleted!');
+            return redirect()->back()->with('msg','advert was successfully deleted!');
         }else{
             return redirect()->back()->with('error','ERROR! could not delete advert!');
         }

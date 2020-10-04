@@ -23,30 +23,32 @@
             <form action="{{ url('admin/adverts/'.$advert->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label>Advert Title</label>
-                    @if(session('errors'))
-                    <div class="text text-danger">{{session('errors')->first('advert_title')}}*</div>
-                    @endif
-                <input class="form-control" type="text" name="advert_title" value="{{$advert->advert_title}}">
-                </div>
-                <div class="form-group">
-                    <label>Advert Image</label>
-                    @if(session('errors'))
-                    <div class="text text-danger">{{session('errors')->first('advert_image')}}*</div>
-                    @endif
-                    <input class="form-control" type="file" name="advert_image">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    @if(session('errors'))
-                    <div class="text text-danger">{{session('errors')->first('advert_description')}}*</div>
-                    @endif
-                    <textarea cols="30" rows="4" class="form-control" name="advert_description">{{$advert->advert_description}}</textarea>
-                </div>
-                <div class="m-t-20 text-center">
-                    <button class="btn btn-primary submit-btn">Save</button>
-                </div>
+                <div id="form" class="form-group"> 
+                    <div class="form-group">
+                        <span>Please select web pages number</span>
+                        <select class="form-control" name="pages" id="pages">
+                            <option value="{{$advert->pages}}">{{$advert->pages}}</option>
+                            <option value="5 pages">5 pages</option>
+                            <option value="all pages">all pages</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <span>Active Status</span>
+                        <select class="form-control" name="status" id="pages">
+                            <option value="{{$advert->status}}">{{$advert->status}}</option>
+                            <option value="active">Activate</option>
+                            <option value="inactive">Inactivate</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Advert Image</label>
+                        <span>Select new advert if you to change or leave current one</span>
+                        <input class="form-control" id="advert_image" type="file" name="advert_image">
+                    <div align="center"><img style="width: 350px; height: 250px" id="preview" src="{{$advert->advert}}" alt="preview" /></div>
+                    <input type="hidden" name="expired" value="{{$advert->expired}}">
+                    <div class="m-t-20 text-center">
+                        <button class="btn btn-primary submit-btn">Save</button>
+                    </div>
                 </form>
             </div>
         </div>

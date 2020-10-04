@@ -32,6 +32,7 @@
                     <select name="article_type" class="form-control" id="">
                         <option value="">Please select the article type to create</option>
                         <?php
+                            define("filename", "article_index.json");
                             $json = file_get_contents(filename);
                             $article_index = json_decode($json);
                             function getArticleIndice($article_index, $index){

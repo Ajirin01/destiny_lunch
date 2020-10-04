@@ -18,6 +18,7 @@ class CreateAdvertsTable extends Migration
             $table->string('advert');
             $table->string('pages');
             $table->string('status');
+            $table->string('expired');
             $table->timestamps();
         });
     }

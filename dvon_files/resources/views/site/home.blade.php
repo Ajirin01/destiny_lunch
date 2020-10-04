@@ -255,6 +255,8 @@
                     likes_container.innerText = likes;
                 }else if(msg === "failure"){
                     alert("Internal error has occurred!");
+                }else{
+                    alert('connection error')
                 }
             
         };

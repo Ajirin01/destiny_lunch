@@ -45,6 +45,7 @@
 <script>
     var num = document.getElementById('num')
     var form = document.getElementById('form')
+    var pages = document.getElementById('pages')
 
     function readURL(input, index){
         console.log('hello from readURL')
@@ -67,6 +68,14 @@
         for(i; i < num.value; i++){
 
             form.innerHTML += '<div id="form'+i+'" class="form-group" style="border-bottom: 2px purple dotted">' 
+                            + '</div>'
+                            + '<div class="form-group">'
+                            + '<span>Please select web pages number</span>'
+                            + '<select class="form-control" name="pages[]" id="pages">'
+                            + '<option value="">Please select pages</option>'
+                            + '<option value="5 pages">5 pages</option>'
+                            + '<option value="all pages">all pages</option>'
+                            + '</select>'
                             + '</div>'
                             + '<div class="form-group">'
                             + '<label>Advert Image</label>'

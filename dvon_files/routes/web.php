@@ -21,9 +21,9 @@ Route::prefix('admin')->group(function(){
         Route::post('update_comment_status/{comment_id}', 'Admin\UserActionToArticle@update_comment_status');
         Route::resource('adverts', 'Admin\advertsController');
         Route::resource('users', 'Admin\usersController')->middleware('admin');
-        Route::resource('country', 'Admin\countriesController');
+        // Route::resource('country', 'Admin\countriesController');
         Route::resource('external_links', 'Admin\linksController');
-        Route::resource('blog', 'Admin\blogController')->middleware('admin');
+        // Route::resource('blog', 'Admin\blogController')->middleware('admin');
         Route::resource('article', 'Admin\articleController');
         Route::resource('profile', 'Admin\profileController')->middleware('admin');
 }); 
@@ -35,7 +35,7 @@ Route::get('/home', function () {
 
 Route::get('/about', function () {
     return view('site.about',['title'=> 'ABOUT US']);
-})->name('home')->middleware('auth');
+})->name('about');
 
 Route::prefix('articles')->group(function () {
     Route::get('/{type}',	'site\ArticlesController@index')->name('articles-list');

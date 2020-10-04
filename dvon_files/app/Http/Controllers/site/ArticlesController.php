@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Country as Country;
 use App\Article as Article;
 use App\ArticleComment as ArticleComment;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; 
 use Session;
 
 class ArticlesController extends Controller

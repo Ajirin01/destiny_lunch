@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Advert extends Model
 {
     protected $fillable = [
-        'advert','pages', 'status'
+        'advert','pages', 'status', 'expired',
     ];
 }
