@@ -31,28 +31,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $article_index = [
-            'nigerians-at-home-achievers',
-            'nigerians-in-diaspora-achievers',
-            'notable-profiles',
-            'regional-updates',
-            'disapora-updates',
-            'global-updates',
-            'tribes-and-culture',
-            'agriculture',
-            'mineral-resources',
-            'tourism',
-            'technology-tips',
-            'business-supports',
-            'industrial-development',
-            'made-in-nigeria-products',
-            'exclusive-services',
-            'promotions',
-            'invest-in-nigeria',
-            'not-for-profits',
-            'humanitarian',
-            'destiny-nigeria-development-projects-initiatives',
-        ];
+        define("filename", "article_index.json");
+        $json = file_get_contents(filename);
+        $article_index = json_decode($json);
+        
         $Articles = new Article();
         $random_articles_array = array();
         $latest_articles_array = array();
