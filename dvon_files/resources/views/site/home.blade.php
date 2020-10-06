@@ -100,25 +100,26 @@
                                             </p>
                                             <div class="align-items-center">
                                                 @php
-                                                    function getLikesH($article_id){
-                                                        $likes = App\Like::where('article_id',$article_id)->get();
-                                                        return count($likes);
-                                                    }
+                                                    include_once('includes.likes_comments_handler.php');
+                                                    // function getLikesH($article_id){
+                                                    //     $likes = App\Like::where('article_id',$article_id)->get();
+                                                    //     return count($likes);
+                                                    // }
 
-                                                    function getCommentsH($article_id){
-                                                        $comments = App\ArticleComment::where('article_id',$article_id)->get();
-                                                        return count($comments);
-                                                    }
+                                                    // function getCommentsH($article_id){
+                                                    //     $comments = App\ArticleComment::where('article_id',$article_id)->get();
+                                                    //     return count($comments);
+                                                    // }
 
-                                                    function getLikeUserH($article_id, $user_id){
-                                                        $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                                        return count($likes);
-                                                    }
+                                                    // function getLikeUserH($article_id, $user_id){
+                                                    //     $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
+                                                    //     return count($likes);
+                                                    // }
 
-                                                    function getCommentUserH($article_id, $user_id){
-                                                        $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                                        return count($likes);
-                                                    }
+                                                    // function getCommentUserH($article_id, $user_id){
+                                                    //     $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
+                                                    //     return count($likes);
+                                                    // }
 
                                                 @endphp
                                                 <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn">
