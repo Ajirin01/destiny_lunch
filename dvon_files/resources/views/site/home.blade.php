@@ -100,7 +100,7 @@
                                             </p>
                                             <div class="align-items-center">
                                                 @php
-                                                    include_once('includes.likes_comments_handler.php');
+                                                    include_once('includes/likes_comments_handler.php');
                                                     // function getLikesH($article_id){
                                                     //     $likes = App\Like::where('article_id',$article_id)->get();
                                                     //     return count($likes);
