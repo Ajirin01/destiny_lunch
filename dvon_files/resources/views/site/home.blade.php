@@ -100,22 +100,22 @@
                                             </p>
                                             <div class="align-items-center">
                                                 @php
-                                                    function getLikes($article_id){
+                                                    function getLikesH($article_id){
                                                         $likes = App\Like::where('article_id',$article_id)->get();
                                                         return count($likes);
                                                     }
 
-                                                    function getComments($article_id){
+                                                    function getCommentsH($article_id){
                                                         $comments = App\ArticleComment::where('article_id',$article_id)->get();
                                                         return count($comments);
                                                     }
 
-                                                    function getLikeUser($article_id, $user_id){
+                                                    function getLikeUserH($article_id, $user_id){
                                                         $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
                                                         return count($likes);
                                                     }
 
-                                                    function getCommentUser($article_id, $user_id){
+                                                    function getCommentUserH($article_id, $user_id){
                                                         $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
                                                         return count($likes);
                                                     }
@@ -123,7 +123,7 @@
                                                 @endphp
                                                 <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn">
                                                     @if (Auth::user())
-                                                        @if (getLikeUser($article['id'], Auth::user()->id)>0)
+                                                        @if (getLikeUserH($article['id'], Auth::user()->id)>0)
                                                             <i style="color: red" id="like-icon" class="fa fa-thumbs-up"></i>
                                                         @else
                                                             <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
@@ -133,13 +133,13 @@
                                                     @endif
                                                     <span id="likes">
                                                         @php
-                                                            echo getLikes($article['id']);
+                                                            echo getLikesH($article['id']);
                                                         @endphp
                                                     </span>
                                                 </a>
                                                 <a href="{{URL::to('articles/'.$article['article_type'].'/'.$article['id'])}}" class="post-comment">
                                                     @if (Auth::user())
-                                                        @if (getCommentUser($article['id'], Auth::user()->id)>0)
+                                                        @if (getCommentUserH($article['id'], Auth::user()->id)>0)
                                                             <i style="color: red" id="comment-icon" class="fa fa-comments"></i>
                                                         @else
                                                             <i style="color: gray" id="comment-icon" class="fa fa-comments"></i>
@@ -149,7 +149,7 @@
                                                     @endif
                                                     <span id="likes">
                                                         @php
-                                                            echo getComments($article['id']);
+                                                            echo getCommentsH($article['id']);
                                                         @endphp
                                                     </span>
                                             </div>
@@ -162,14 +162,14 @@
 
                 </div>
             </div>
-            @if (count($random_articles)>1)
+            @if (count($latest_articles)>1)
                 <div class="col-12 col-lg-4">
                     <div class="section-heading">
                         <h6 class="rect-box-headline">Info</h6>
                     </div>
                     <!-- Popular News Widget -->
                     <div class="popular-news-widget mb-30">
-                        <h3>4 Most Recent Updates</h3>
+                        <h4 style="color: red">4 Most Recent Updates</h4>
                         @foreach ($latest_articles as $key => $latest)
                             <!-- Single Popular Blog -->
                             <div class="single-popular-post">

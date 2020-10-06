@@ -2,10 +2,9 @@
 @section('upper-content')
 @if (count($article)>0)
     <h3 class="text-center">{{$article[0]->article_title}}</h3>
-    <div class="article-items">
+    <div class="article-items" style="word-break: break-word;">
         <?php echo $article[0]->article_intro;?>
     </div>
-    
 @else
     <h3 class="text-center">Ops! Article content is unavailable at the moment</h3>
     <h3 class="text-center">Please check again later</h3>

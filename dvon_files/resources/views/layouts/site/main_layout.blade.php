@@ -1,6 +1,6 @@
 <?php
-    include('includes/get_random_latest.php');
-    include('includes/visitor_counter.php');
+    include_once('includes/get_random_latest.php');
+    include_once('includes/visitor_counter.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

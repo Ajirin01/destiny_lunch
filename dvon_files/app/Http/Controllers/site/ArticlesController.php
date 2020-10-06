@@ -82,7 +82,6 @@ class ArticlesController extends Controller
         $comment = new ArticleComment(['user_id'=> Auth::user()->id,'comment'=> $comment, 'status'=>'active']);
         
         $article->comments()->save($comment);
-        Session::put('comment','');
         return redirect()->back()->with('msg','Comment posted!');
     }
 

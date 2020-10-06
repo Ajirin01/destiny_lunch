@@ -31,8 +31,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        define("filename", "article_index.json");
-        $json = file_get_contents(filename);
+        define("filenameH", "article_index.json");
+        $json = file_get_contents(filenameH);
         $article_index = json_decode($json);
         
         $Articles = new Article();
