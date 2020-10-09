@@ -1246,3 +1246,14 @@ textarea:focus {
   background-color: rgb(255, 230, 0) !important;
   color: #5d1d57 !important;
 }
+
+.site-btn{
+  background: transparent;
+  border: none;
+  background-color: #5d1d57;
+  padding: 10px 30px;
+  color: white;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer
+}

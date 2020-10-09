@@ -29,6 +29,8 @@ class advertsController extends Controller
 
     public function store(Request $request)
     {
+        return response()->json($request->all());
+        exit;
         $Advert = new Advert;
         $rules = [
             'advert_image' => 'required',
@@ -58,6 +60,8 @@ class advertsController extends Controller
                 }
                 if($created){
                     return redirect()->back()->with('msg','advert(s) was successfully created!');
+                }else if(!$created){
+                    return redirect()->back()->with('error','ERROR! could not create advert(s)!');
                 }
             }else{
                 return redirect()->back()->with('error','ERROR! could not create advert(s)!');

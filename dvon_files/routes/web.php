@@ -11,6 +11,8 @@ Route::get('/register-next', function(Request $request){
     return view('auth.register-next');
 })->name('next');
 
+Route::get('/place-your-adverts', 'site\TopLeftLinksController@place_advert');
+
 Auth::routes();
 
 Route::prefix('admin')->group(function(){

@@ -101,38 +101,19 @@
                                             <div class="align-items-center">
                                                 @php
                                                     include_once('includes/likes_comments_handler.php');
-                                                    // function getLikesH($article_id){
-                                                    //     $likes = App\Like::where('article_id',$article_id)->get();
-                                                    //     return count($likes);
-                                                    // }
-
-                                                    // function getCommentsH($article_id){
-                                                    //     $comments = App\ArticleComment::where('article_id',$article_id)->get();
-                                                    //     return count($comments);
-                                                    // }
-
-                                                    // function getLikeUserH($article_id, $user_id){
-                                                    //     $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                                    //     return count($likes);
-                                                    // }
-
-                                                    // function getCommentUserH($article_id, $user_id){
-                                                    //     $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                                    //     return count($likes);
-                                                    // }
-
                                                 @endphp
-                                                <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn">
+
+                                                <a href="/api/like/{{$article['id']}}" class="{{$article['id']}}" id="like-btn{{$article['id']}}" onclick="handleLikeButtonClicked({{$article['id']}})">
                                                     @if (Auth::user())
                                                         @if (getLikeUserH($article['id'], Auth::user()->id)>0)
-                                                            <i style="color: red" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                            <i style="color: red" id="like-icon{{$article['id']}}" class="fa fa-thumbs-up"></i>
                                                         @else
-                                                            <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                            <i style="color: gray" id="like-icon{{$article['id']}}" class="fa fa-thumbs-up"></i>
                                                         @endif
                                                     @else
-                                                        <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                                        <i style="color: gray" id="like-icon{{$article['id']}}" class="fa fa-thumbs-up"></i>
                                                     @endif
-                                                    <span id="likes">
+                                                    <span id="likes{{$article['id']}}">
                                                         @php
                                                             echo getLikesH($article['id']);
                                                         @endphp
@@ -182,6 +163,19 @@
                         @endforeach
                     </div>
 
+                    <div class="popular-news-widget mb-30">
+                        <h4 style="color: red">Links</h4>
+                        @foreach ($latest_articles as $key => $latest)
+                            <!-- Single Popular Blog -->
+                            <div class="single-popular-post">
+                                <a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">
+                                <h6><span>{{$key + 1}}.</span> {{$latest['article_title']}}</h6>
+                                </a>
+                                {{-- <p>{{$latest['created_at']->diffforHumans()}}</p> --}}
+                            </div>
+                        @endforeach
+                    </div>
+
                     <!-- Newsletter Widget -->
                     <div class="newsletter-widget">
                         <h4>Newsletter</h4>
@@ -216,35 +210,35 @@
 </div>
 <!-- ##### Video Post Area End ##### -->
 @if (Auth::user())
-<script>
-    var like_btn = document.getElementById('like-btn');
-    var like_icon = document.getElementById('like-icon');
-    var likes_container = document.getElementById('likes');
+    <script>
+        function handleLikeButtonClicked(id){
+            event.preventDefault()
+            var like_btn = document.getElementById('like-btn'+id)
+            var like_icon = document.getElementById('like-icon'+id)
+            var likes_container = document.getElementById('likes'+id)
+            console.log('like button clicked on ID:'+ id)
+            var user_id = "{{Auth::user()->id}}"
+            var url = like_btn.href
 
-    like_btn.onclick = (e) => {
-        e.preventDefault()
-        var user_id = "{{Auth::user()->id}}"
-        var url = like_btn.href
+            var xhr, formData;
 
-        var xhr, formData;
+            xhr = new XMLHttpRequest();
+            xhr.withCredentials = false;
+            xhr.open('POST', url);
 
-        xhr = new XMLHttpRequest();
-        xhr.withCredentials = false;
-        xhr.open('POST', url);
+            xhr.onload = function(){
+                var json;
 
-        xhr.onload = function(){
-            var json;
+                if(xhr.status != 200){
+                    console.log('HTTP Error:' + xhr.status);
+                    return;
+                }
 
-            if(xhr.status != 200){
-                console.log('HTTP Error:' + xhr.status);
-                return;
-            }
+                json = JSON.parse(xhr.responseText);
 
-            json = JSON.parse(xhr.responseText);
-
-            var res = xhr.responseText;
-            var msg = JSON.parse(res).msg;
-            var likes = JSON.parse(res).likes;
+                var res = xhr.responseText;
+                var msg = JSON.parse(res).msg;
+                var likes = JSON.parse(res).likes;
 
                 if(msg === "liked"){
                     like_icon.style.color = "red";
@@ -260,23 +254,23 @@
                     alert('connection error')
                 }
             
-        };
+            };
 
-        formData = new FormData();
-        formData.append('id', user_id);
+            formData = new FormData();
+            formData.append('id', user_id);
 
-        xhr.send(formData);
-    }
-</script>
+            xhr.send(formData);
+        }
+    </script>
 @else
-<script>
-    var like_btn = document.getElementById('like-btn')
+    <script>
+        var like_btn = document.getElementById('like-btn')
 
-    like_btn.onclick = (e) => {
-        e.preventDefault()
-        alert('Ops!, You can not like article because you are not logged in. Please Login or Register to like article.')
-    }
-</script>
+        like_btn.onclick = (e) => {
+            e.preventDefault()
+            alert('Ops!, You can not like article because you are not logged in. Please Login or Register to like article.')
+        }
+    </script>
 @endif
 
 @endsection

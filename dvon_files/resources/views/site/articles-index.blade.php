@@ -11,38 +11,19 @@
                     </a>
                     <div class="align-items-center">
                         @php
-                            function getLikesH($article_id){
-                                $likes = App\Like::where('article_id',$article_id)->get();
-                                return count($likes);
-                            }
-
-                            function getCommentsH($article_id){
-                                $comments = App\ArticleComment::where('article_id',$article_id)->get();
-                                return count($comments);
-                            }
-
-                            function getLikeUserH($article_id, $user_id){
-                                $likes = App\Like::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                return count($likes);
-                            }
-
-                            function getCommentUserH($article_id, $user_id){
-                                $likes = App\ArticleComment::where('user_id',$user_id)->where('article_id',$article_id)->get();
-                                return count($likes);
-                            }
-
+                            include_once('includes/likes_comments_handler.php');
                         @endphp
-                        <a href="/api/like/{{$articles[0]->id}}" class="{{$articles[0]->id}}" id="like-btn">
+                        <a href="/api/like/{{$articles[0]->id}}" class="{{$articles[0]->id}}" id="like-btn{{$articles[0]->id}}" onclick="handleLikeButtonClicked({{$articles[0]->id}})">
                             @if (Auth::user())
                                 @if (getLikeUserH($articles[0]->id, Auth::user()->id)>0)
-                                    <i style="color: red" id="like-icon" class="fa fa-thumbs-up"></i>
+                                    <i style="color: red" id="like-icon{{$articles[0]->id}}" class="fa fa-thumbs-up"></i>
                                 @else
-                                    <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                    <i style="color: gray" id="like-icon{{$articles[0]->id}}" class="fa fa-thumbs-up"></i>
                                 @endif
                             @else
-                                <i style="color: gray" id="like-icon" class="fa fa-thumbs-up"></i>
+                                <i style="color: gray" id="like-icon{{$articles[0]->id}}" class="fa fa-thumbs-up"></i>
                             @endif
-                            <span id="likes">
+                        <span id="likes{{$articles[0]->id}}">
                                 @php
                                     echo getLikesH($articles[0]->id);
                                 @endphp
@@ -58,7 +39,7 @@
                             @else
                                 <i style="color: gray" id="comment-icon" class="fa fa-comments"></i>
                             @endif
-                            <span id="likes">
+                            <span id="comment">
                                 @php
                                     echo getCommentsH($articles[0]->id);
                                 @endphp
@@ -101,17 +82,17 @@
                                                 <h6>{{$article->article_title}}……</h6>
                                             </a>
                                             <div class="align-items-center">
-                                                <a href="/api/like/{{$article->id}}" class="{{$article->id}}" id="like-btn2">
+                                                <a href="/api/like/{{$article->id}}" class="{{$article->id}}" id="like-btn{{$article->id}}" onclick="handleLikeButtonClicked({{$article->id}})">
                                                     @if (Auth::user())
                                                         @if (getLikeUserH($article->id, Auth::user()->id)>0)
-                                                            <i style="color: red" id="like-icon2" class="fa fa-thumbs-up"></i>
+                                                            <i style="color: red" id="like-icon{{$article->id}}" class="fa fa-thumbs-up"></i>
                                                         @else
-                                                            <i style="color: gray" id="like-icon2" class="fa fa-thumbs-up"></i>
+                                                            <i style="color: gray" id="like-icon{{$article->id}}" class="fa fa-thumbs-up"></i>
                                                         @endif
                                                     @else
-                                                        <i style="color: gray" id="like-icon2" class="fa fa-thumbs-up"></i>
+                                                        <i style="color: gray" id="like-icon{{$article->id}}" class="fa fa-thumbs-up"></i>
                                                     @endif
-                                                    <span id="likes2">
+                                                    <span id="likes{{$article->id}}">
                                                         @php
                                                             echo getLikesH($article->id);
                                                         @endphp
@@ -345,15 +326,19 @@
 
     @if (Auth::user())
     <script>
-        var like_btn = document.getElementById('like-btn');
-        var like_btn2 = document.getElementById('like-btn2');
-        var like_icon = document.getElementById('like-icon');
-        var like_icon2 = document.getElementById('like-icon2');
-        var likes_container = document.getElementById('likes');
-        var likes_container2 = document.getElementById('likes2');
-
-        like_btn.onclick = (e) => {
-            e.preventDefault()
+        function handleLikeButtonClicked(id){
+            event.preventDefault()
+            var like_btn = document.getElementById('like-btn'+id);
+            // var like_btn2 = document.getElementById('like-2-btn'+id);
+            var like_icon = document.getElementById('like-icon'+id);
+            // var like_icon2 = document.getElementById('like-2-icon'+id);
+            var likes_container = document.getElementById('likes'+id);
+            // var likes_container2 = document.getElementById('likes-second'+id);
+            
+            // var like_btn = document.getElementById('like-btn'+id)
+            // var like_icon = document.getElementById('like-icon'+id)
+            // var likes_container = document.getElementById('likes'+id)
+            // console.log('like button clicked on ID:'+ id)
             var user_id = "{{Auth::user()->id}}"
             var url = like_btn.href
 
@@ -398,60 +383,11 @@
 
             xhr.send(formData);
         }
-
-        like_btn2.onclick = (e) => {
-            e.preventDefault()
-            var user_id = "{{Auth::user()->id}}"
-            var url = like_btn2.href
-
-            var xhr, formData;
-
-            xhr = new XMLHttpRequest();
-            xhr.withCredentials = false;
-            xhr.open('POST', url);
-
-            xhr.onload = function(){
-                var json;
-
-                if(xhr.status != 200){
-                    console.log('HTTP Error:' + xhr.status);
-                    return;
-                }
-
-                json = JSON.parse(xhr.responseText);
-
-                var res = xhr.responseText;
-                var msg = JSON.parse(res).msg;
-                var likes = JSON.parse(res).likes;
-
-                    if(msg === "liked"){
-                        like_icon2.style.color = "red";
-                        console.log(likes);
-                        likes_container2.innerText = likes;
-                    }else if(msg === "unliked"){
-                        like_icon2.style.color = "gray";
-                        console.log(likes);
-                        likes_container2.innerText = likes;
-                    }else if(msg === "failure"){
-                        alert("Internal error has occurred!");
-                    }else{
-                        alert('connection error')
-                    }
-                
-            };
-
-            formData = new FormData();
-            formData.append('id', user_id);
-
-            xhr.send(formData);
-        }
     </script>
     @else
     <script>
-        var like_btn = document.getElementById('like-btn')
-
-        like_btn.onclick = (e) => {
-            e.preventDefault()
+        function handleLikeButtonClicked(id){
+            event.preventDefault()
             alert('Ops!, You can not like article because you are not logged in. Please Login or Register to like article.')
         }
     </script>

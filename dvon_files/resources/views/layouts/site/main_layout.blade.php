@@ -35,7 +35,7 @@
                         <div class="top-header-content d-flex align-items-center justify-content-between">
                             <!-- Logo -->
                             <div class="logo" style="padding-top: 30px">
-                                <a style="transform: scale(.7); margin-left: -140px" href="index.html" style="width: 70%;">
+                                <a style="transform: scale(.7); margin-left: -140px" href="/" style="width: 70%;">
                                     <div style="width: 100%">
                                             <img style="width: 100%" src="{{asset('site/img/core-img/destiny_logo2.png')}}">
                                             <div style="font-family: Brush Script Std; color: #24e600;
@@ -102,7 +102,7 @@
                     <!-- Menu -->
                     <nav class="classy-navbar justify-content-between" id="newspaperNav">
                         <div class="logo" style="width: 100%; padding-top: 20px; padding-left: 60px">
-                            <a href="index.html" style="width: 100%;">
+                            <a href="/" style="width: 100%;">
                                 <div style="width: 100%">
                                         <img style="transform: scale(1.8)" src="{{asset('site/img/core-img/destiny_logo2.png')}}">
                                         <div style="font-family: Brush Script Std; color: #24e600;
@@ -281,7 +281,7 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                            <a href="/articles/place-your-adverts" class="post-catagory">Place Your Adverts</a>
+                        <a href="/place-your-adverts" class="post-catagory">Place Your Adverts</a>
                         </div>
                     </div>
                     
@@ -406,7 +406,7 @@
                         <div class="footer-widget-area mt-80">
                             <!-- Footer Logo -->
                             <div class="footer-logo">
-                                <a href="index.html"><img style="width: 250px; height: 70px" src="{{asset('site/img/core-img/destiny-logo.png')}}" alt=""></a>
+                                <a href="/"><img style="width: 250px; height: 70px" src="{{asset('site/img/core-img/destiny-logo.png')}}" alt=""></a>
                             </div>
                             <!-- List -->
                             <ul class="list">
