@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('subscribed')->default('false');
+            $table->boolean('subscribed')->default(false);
             $table->integer('subscription_id')->default(Null);
             $table->string('type')->default('user');
             $table->rememberToken();

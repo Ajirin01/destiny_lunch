@@ -17,7 +17,7 @@ class CreateAdvertTempDataTable extends Migration
             $table->bigIncrements('id');
             $table->string('email')->default(Null);
             $table->string('advert_set_reference')->default(Null);
-            $table->integer('subscription_id ')->default(Null);
+            $table->integer('subscription_id')->default(Null);
             $table->timestamps();
         });
     }
