@@ -1257,3 +1257,16 @@ textarea:focus {
   border-radius: 50px;
   cursor: pointer
 }
+
+.blog-links{
+  padding: 8px 15px;
+  background-color: red;
+  margin: 10px 10px 10px 0;
+  opacity: 1;
+  transition: all .5s ease-in
+}
+
+.blog-links:hover{
+opacity: .5;
+cursor: pointer;
+}

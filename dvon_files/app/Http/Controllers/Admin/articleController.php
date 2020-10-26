@@ -9,11 +9,6 @@ use	Illuminate\Support\Facades\Storage;
 
 class articleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function getArticles($article_type){
         $Articles = new Article;
         $articles = $Articles::where('article_type',$article_type)->paginate(12);
@@ -49,26 +44,20 @@ class articleController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('Admin.Article.article-creation-form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        // return response()->json($request->all());
+        $image_src = preg_replace('/\.$/','', $request->image_src);
+        $image_src = preg_replace("/\/dvon_files/","dvon_files", $image_src);
+        $image_src = explode(',',$image_src);
+
+        // return response()->json($image_src);
         // exit;
+
         $Article = new Article;
 
         $rules = [
@@ -94,7 +83,7 @@ class articleController extends Controller
 
                 $article_type = $request->get('article_type');
                 $article_title = $request->get('article_title');
-                $article_intro_image = $image_name;
+                $article_intro_image = "/dvon_files/public/uploads/".$image_name;
                 $article_intro = $request->get('article_intro');
                 $article_description = $request->get('article_description');
     
@@ -102,6 +91,7 @@ class articleController extends Controller
                     'article_type'=>$article_type,
                     'article_title'=>$article_title,
                     'article_intro_image'=>$article_intro_image,
+                    'article_description_images_array'=>json_encode($image_src),
                     'article_intro'=>$article_intro, 
                     'article_description'=>$article_description]);
     
@@ -122,15 +112,12 @@ class articleController extends Controller
         return view('Admin.Article.edit-article',['article'=> $article]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
+        $image_src = preg_replace('/\.$/','', $request->image_src);
+        $image_src = preg_replace("/\/dvon_files/","dvon_files", $image_src);
+        $image_src = explode(',',$image_src);
+        
         $Article = new Article;
         $article = Article::find($id);
 
@@ -157,7 +144,7 @@ class articleController extends Controller
 
                 $article_type = $request->get('article_type');
                 $article_title = $request->get('article_title');
-                $article_intro_image = $image_name;
+                $article_intro_image = "/dvon_files/public/uploads/".$image_name;
                 $article_intro = $request->get('article_intro');
                 $article_description = $request->get('article_description');
     
@@ -165,6 +152,7 @@ class articleController extends Controller
                     'article_type'=>$article_type,
                     'article_title'=>$article_title,
                     'article_intro_image'=>$article_intro_image,
+                    'article_description_images_array'=>json_encode($image_src),
                     'article_intro'=>$article_intro, 
                     'article_description'=>$article_description]);
     
@@ -189,19 +177,36 @@ class articleController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $Article = new Article;
-        $article = Article::find($id);
+        $article = Article::findOrFail($id);
+
+        $image_src_array = $article->article_description_images_array;
+
+        $image_name = preg_replace("/\/dvon_files/","dvon_files", $article->article_intro_image);
+
+        for($i=0; $i<count(json_decode($image_src_array)); $i++){
+            try{
+                $path = json_decode($image_src_array)[$i];
+
+                if(file_exists($path)){
+                    unlink(json_decode($image_src_array)[$i]);
+                }else{
+                    ;
+                }
+                
+            }catch(Exception $e){
+                ;
+            }
+            
+        }
+
+        unlink($image_name);
+
         $delete_article = $article->delete();
         if($delete_article){
-            Storage::delete('public/uploads/'.$article->article_image);
+
             return redirect()->back()->with('msg','article was successfully deleted!');
         }else{
             return redirect()->back()->with('error','ERROR! could not delete article!');

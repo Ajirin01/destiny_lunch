@@ -8,6 +8,7 @@ tinymce.init({
     images_upload_url: config.routes.tiny_url,
     images_upload_handler: function(blobInfo, success, failure){
         var xhr, formData;
+        var image_src = document.getElementById('image-src');
 
         xhr = new XMLHttpRequest();
         xhr.withCredentials = false;
@@ -28,6 +29,11 @@ tinymce.init({
             }
 
             success(json.location);
+
+            config.variables.image_src.push(json.location);
+
+            image_src.value = config.variables.image_src;
+
         };
 
         formData = new FormData();

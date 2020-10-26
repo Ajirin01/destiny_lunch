@@ -26,7 +26,7 @@
             <div class="col-lg-4">
                 <div class="article grid-article">
                     <div class="article-image" style="height: 300px">
-                    <a href="{{ url('admin/article/'.$article->id.'/edit') }}"><img style="width:300xp; height: 300px" class="img-fluid" src="/dvon_files/public/uploads/{{$article->article_intro_image}}" alt=""></a>
+                    <a href="{{ url('admin/article/'.$article->id.'/edit') }}"><img style="width:300xp; height: 300px" class="img-fluid" src="{{$article->article_intro_image}}" alt=""></a>
                     </div>
                     <div class="article-content">
                         <h3 class="article-title"><a href="{{ url('admin/article/'.$article->id.'/edit') }}">{{$article->article_title}}</a></h3>
@@ -56,23 +56,6 @@
             @endforeach
         </div>
         <div>{{ $articles->links() }}</div>
-    </div>
-</div>
-
-<div id="delete_department" class="modal fade delete-modal" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-body text-center">
-                <img src="assets/img/sent.png" alt="" width="50" height="46">
-                <h3>Are you sure want to delete this Appointment?</h3>
-                <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                    <button type="submit" class="btn btn-danger"
-                    onclick="
-                    document.getElementById('delete-form').submit();"
-                    >Delete</button>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

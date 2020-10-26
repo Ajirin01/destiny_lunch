@@ -11,7 +11,9 @@ class Article extends Model
         'article_title',
         'article_intro_image',
         'article_intro',
-        'article_description'
+        'article_description_images_array',
+        'article_description',
+        'paid'
     ];
 
     public function likes(){

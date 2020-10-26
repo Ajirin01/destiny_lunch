@@ -1,9 +1,10 @@
 <?php 
-    define("filename", "CountryCodes.json");
-	define("mode", "r");
-	$ph = fopen(filename, mode);
-	$json = file_get_contents(filename);
-	$countries = json_decode($json, true);
+    // define("filename", "CountryCodes.json");
+	// define("mode", "r");
+	// $ph = fopen(filename, mode);
+	// $json = file_get_contents(filename);
+    // $countries = json_decode($json, true);
+    $countries = App\Country::all();
 ?>
 @extends('layouts.auth.auth_layout')
 
@@ -44,7 +45,7 @@
                     <select class="input100" id="country" name="country" value="{{ old('country') }}" required autocomplete="country" autofocus placeholder="country">
                         <option value="">Please select country</option>
                         @foreach ($countries as $country)
-                        <option value="{{$country['dial_code']}}">{{$country['name']}}</option>
+                        <option value="{{$country->callingCodes}}">{{$country->name}}</option>
                         @endforeach
                         <input type="hidden" id="country_name" name="country_name" value="">
                     </select>

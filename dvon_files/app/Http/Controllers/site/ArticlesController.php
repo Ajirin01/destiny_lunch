@@ -58,6 +58,8 @@ class ArticlesController extends Controller
         $json = file_get_contents(filenameA);
         $article_index = json_decode($json);
 
+        
+
         //this next step checks if the article index request is valid. if its valid, the system fetches article correcting to the index
         //and if not valid, a not found(404) page is returned to the user
         if(in_array($type, $article_index)){
@@ -66,7 +68,15 @@ class ArticlesController extends Controller
                     $article_at_index = ArticlesController::getArticleIndex($article_index,$i);
                     $title = ArticlesController::getArticleIndex($article_index,$i)['title'];
                     $articles = ArticlesController::getSingleArticle($type,$article);
-                    return view('site.article-details',['title'=> $title, 'article'=> $articles, 'article_type'=> $type]);
+
+                    $article = Article::find($article);
+
+                    $article_comments = $article->comments()->get();
+
+                    $number_of_comments = $article_comments->count();
+
+                    return view('site.article-details',['title'=> $title, 'article'=> $articles,
+                                'article_type'=> $type, 'comments'=> $article_comments, 'number_of_comments'=>$number_of_comments]);
                 }
             }
         }else{

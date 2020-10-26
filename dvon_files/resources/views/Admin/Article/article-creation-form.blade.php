@@ -79,6 +79,7 @@
                     @endif
                     <textarea cols="30" rows="15" class="form-control" id="myTextArea" name="article_description"></textarea>
                 </div>
+                <input type="hidden" name="image_src" id="image-src">
                 <div class="m-t-20 text-center">
                     <button class="btn btn-primary submit-btn">Publish Article</button>
                 </div>

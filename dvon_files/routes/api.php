@@ -82,3 +82,9 @@ Route::post('/upload-tinymce', function(Request $request){
     }
 
 });
+
+Route::get('/get-adverts', function(){
+    $adverts = App\Advert::where('position', 'center')->where('status','active')
+                ->where('expired','no')->inRandomOrder()->first();
+    echo json_encode($adverts);
+});

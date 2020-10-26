@@ -14,6 +14,11 @@
                 <span class="login100-form-title">
                     {{ __('Register') }}
                 </span>
+                @error('name')
+                    <span class="text-danger"  role="alert">
+                        <strong class="text-danger">{{ $message }}</strong>
+                    </span>
+                @enderror
                 @error('email')
                     <span class="text-danger"  role="alert">
                         <strong class="text-danger">{{ $message }}</strong>

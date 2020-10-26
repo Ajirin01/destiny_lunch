@@ -4,24 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\BlogName as Slug;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         // $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function getArticleIndex($article_index, $index){
         $article_at_index = $article_index[$index];
         $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
@@ -35,9 +26,13 @@ class HomeController extends Controller
         $json = file_get_contents(filenameH);
         $article_index = json_decode($json);
         
+        $Slug = new Slug();
         $Articles = new Article();
         $random_articles_array = array();
         $latest_articles_array = array();
+
+        $links = $Slug::all();
+
         for($i = 0; $i< count($article_index); $i++){
             $article_at_index = HomeController::getArticleIndex($article_index,$i);
             $articles = $Articles::where('article_type', $article_at_index['type'])->inRandomOrder()->first();

@@ -21,7 +21,12 @@
             </div>
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
+                @php
+                    $user_country = Auth::user()->country;
+                    $country_detail =  App\Country::where('name',$user_country)->first();
+                @endphp
                 <form action="{{ route('adverts.store') }}" runat="server" method="POST" enctype="multipart/form-data">
+                    
                     @csrf
                         <div class="form-group">
                             <br>
@@ -40,11 +45,17 @@
                             <table align="right" class="table table-collapse" id="subtotal">
                                 
                             </table>
-                            <p><span class="text-left">Total:  </span><span id="currency">N</span><span id="total">0</span></p>
+                        <p><span class="text-left">Total:  </span><span id="currency">{{$country_detail->currencies}} </span><span id="total">0</span></p>
                         </div>
-                        <input type="hidden" name="total_advert_price" id="total_advert_price">
+                        {{-- <input type="hidden" name="total_advert_price" id="total_advert_price"> --}}
+                        <input type="hidden" name="name" placeholder="Plan Name" value="Advert Subscription"/>
+                        <input type="hidden" name="amount" placeholder="Amount" id="total_advert_price"/>
+                        <input type="hidden" name="interval" placeholder="Interval" value="monthly"/>
+                        <input type="hidden" name="duration" placeholder="Duration" value="1"/> <!-- Uncomment if you want to add a duration -->
                         <div class="m-t-20 text-center">
-                            <button class="site-btn">Create Advert</button>
+                            {{-- <button class="site-btn">Create Advert</button> --}}
+                            <button class="site-btn">Checkout</button>
+
                         </div>
                     </form>
                 </div>
@@ -58,6 +69,12 @@
         var subtotal = document.getElementById('subtotal')
         var total = document.getElementById('total')
         var total_advert_price = document.getElementById('total_advert_price')
+
+        var five_pages = 200
+        var all_pages = 1000
+        var total_cost_array = []
+        var cart = []
+        var size
 
 
         function readURL(input, index){
@@ -75,14 +92,29 @@
                         var w = this.width;
                         var h = this.height;
                         console.log('width: '+w+' height: '+h)
-                        if(w <= 1000 && h <= 600){
-                            $(id).attr('src', e.target.result)
-                        }else{
-                            $(advert_image).val('')
-                            alert('selected image size is not supported')
-                            $(id).attr('src', '')
+                        if(size == 'center'){
+                            // if(w % h < 100){
+                            if(Math.ceil(w / h)  == 5 || Math.ceil(w / h)  == 6){
+                                console.log(size)
+                                $(id).attr('src', e.target.result)
+                            }else{
+                                console.log(size)
+                                $(advert_image).val('')
+                                alert('Size of the chosen image is not close to 5:1 type')
+                                $(id).attr('src', '')
+                            }
+                        }else if(size == 'side'){
+                            // if(w <= 500 && h <= 600){
+                            if(Math.ceil(w / h)  == 1 || Math.ceil(w / h)  == 2){
+                                console.log(size)
+                                $(id).attr('src', e.target.result)
+                            }else{
+                                console.log(size)
+                                $(advert_image).val('')
+                                alert('Size of the chosen image is not close to 5:5 type')
+                                $(id).attr('src', '')
+                            }
                         }
-                        
                     }
 
                 }
@@ -90,11 +122,6 @@
                 reader.readAsDataURL(input.files[0])
             }
         }
-        
-        var five_pages = 200
-        var all_pages = 1000
-        var total_cost_array = []
-        var cart = []
 
         function sum(array_of_numbers){
             total_sum = array_of_numbers.reduce((a, b) => a+b, 0)
@@ -132,6 +159,19 @@
                  
             }
         }
+        function handleSelectSize(index){
+            var selected = document.getElementById('size'+index)
+            var advert_image = document.getElementById('advert_image'+index)
+            var selected_value = selected.value
+
+            if(selected_value === 'side'){
+               size = selected_value
+               advert_image.style.display = 'block'
+            }else if(selected_value === 'center'){
+                size = selected_value
+                advert_image.style.display = 'block'
+            }
+        }
         num.onchange = () => {
             console.log(num.value)
             var i = 0
@@ -140,6 +180,16 @@
             for(i; i < num.value; i++){
                 form.innerHTML += '<div id="form'+i+'" class="form-group" style="border-bottom: 2px purple dotted">' 
                                 + '</div>'
+
+                                + '<div class="form-group">'
+                                + '<span>Please select advert size type</span>'
+                                + '<select class="form-control" name="size[]" id="size'+i+'" onchange="handleSelectSize('+i+')" required>'
+                                + '<option value="">Please select size</option>'
+                                + '<option value="side">5:5</option>'
+                                + '<option value="center">5:1</option>'
+                                + '</select>'
+                                + '</div>'
+                                
                                 + '<div class="form-group">'
                                 + '<span>Please select web pages number</span>'
                                 + '<select class="form-control" name="pages[]" id="pages'+i+'" onchange="handleSelectPages('+i+')" required>'
@@ -148,9 +198,10 @@
                                 + '<option value="all pages">all pages</option>'
                                 + '</select>'
                                 + '</div>'
+
                                 + '<div class="form-group">'
                                 + '<label>Advert Image</label>'
-                                + '<input class="form-control" id="advert_image'+i+'" type="file" name="advert_image[]" required accept=".jpg, .png, .jpeg, .gif">'
+                                + '<input class="form-control" id="advert_image'+i+'" type="file" name="advert_image[]" required accept=".jpg, .png, .jpeg, .gif" style="display:none">'
                                 + '<div align="center"><img style="width: 350px; height: 250px" id="preview'+i+'" src="#" alt="preview" /></div>'
                                 + '</div>'
     

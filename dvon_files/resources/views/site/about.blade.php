@@ -3,7 +3,7 @@
     <h1 class="text-center">{{$title}}</h1>
     <div class="row">
         <div class="col">
-            {{-- <div class="col-md-12">
+            <div class="col-md-12">
                 <p>
                     Destiny Nigeria’s Voice Magazine is a product of over 2 decades of
                     intensive research about Nigeria as a nation, her people and the great
@@ -38,7 +38,7 @@
                     Akande; Mallam Idris Yahaya; Mr Abayomi Alowooja; Mrs
                     Omobola Oluwehinmi
                 </p>
-            </div> --}}
+            </div>
         </div>
     </div>
 @endsection

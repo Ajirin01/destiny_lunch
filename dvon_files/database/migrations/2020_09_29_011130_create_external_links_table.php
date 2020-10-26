@@ -16,7 +16,6 @@ class CreateExternalLinksTable extends Migration
         Schema::create('external_links', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('link_name');
-            $table->string('link_image');
             $table->string('link_url');
             $table->timestamps();
         });

@@ -19,7 +19,9 @@ class CreateArticlesTable extends Migration
             $table->string('article_title');
             $table->string('article_intro_image');
             $table->text('article_intro');
+            $table->longText('article_description_images_array');
             $table->longText('article_description');
+            $table->boolean('paid')->default('false');
             $table->timestamps();
         });
     }

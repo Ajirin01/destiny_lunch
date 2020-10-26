@@ -1,0 +1,5 @@
+{
+    "require": {
+        "kingflamez/laravelrave": "^3.0"
+    }
+}

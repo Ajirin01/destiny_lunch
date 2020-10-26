@@ -3,12 +3,18 @@
     <h3 class="text-center">{{$title}}</h3>
     <div class="col-12">
         @if (count($articles) > 0)
-            <div class="single-blog-post featured-post col-12">
-                <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="/dvon_files/public/uploads/{{$articles[0]->article_intro_image}}" alt=""></a>
+            <div class="single-blog-post featured-post col-12" style="word-wrap: break-word">
+                {{-- <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img style="width: 100%; height: 500px" src="{{$articles[0]->article_intro_image}}" alt=""></a> --}}
+                <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">
+                    <div style="background-image: url({{$articles[0]->article_intro_image}});
+                    background-size: cover; background-repeat: no-repeat; background-position: center; width: inherit; height: 500px
+                    "></div>
+                </a>
                 <div class="post-data">
                     <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
                         <h6>{{$articles[0]->article_title}}</h6> 
                     </a>
+                    <div class="text-left"><?php echo substr($articles[0]->article_intro,0,500)?>...</div>
                     <div class="align-items-center">
                         @php
                             include_once('includes/likes_comments_handler.php');
@@ -73,14 +79,20 @@
                             <!-- Single Featured Post -->
                             @foreach ($articles as $key => $article)
                                 @if ($key > 0)
-                                    <div class="single-blog-post featured-post mb-30">
-                                        <div >
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$article->id)}}"><img style=" width: 100%; height: 500px" src="/dvon_files/public/uploads/{{$article->article_intro_image}}" alt=""></a>
+                                    <div class="single-blog-post featured-post mb-30" style="word-wrap: break-word">
+                                        <div>
+                                            {{-- <a href="{{URL::to('articles/'.$article_type.'/'.$article->id)}}"><img style=" width: 100%; height: 500px" src="{{$article->article_intro_image}}" alt=""></a> --}}
+                                            <a href="{{URL::to('articles/'.$article_type.'/'.$article->id)}}">
+                                                <div style="background-image: url({{$article->article_intro_image}});
+                                                background-size: cover; background-repeat: no-repeat; background-position: center; width: inherit; height: 500px
+                                                "></div>
+                                            </a>
                                         </div>
                                         <div class="post-data">
                                             <a href="{{URL::to('articles/'.$article_type.'/'.$article->id)}}" class="post-title">
-                                                <h6>{{$article->article_title}}……</h6>
+                                                <h6>{{$article->article_title}}</h6>
                                             </a>
+                                            <div class="text-left"><?php echo substr($article->article_intro,0,500)?>...</div>
                                             <div class="align-items-center">
                                                 <a href="/api/like/{{$article->id}}" class="{{$article->id}}" id="like-btn{{$article->id}}" onclick="handleLikeButtonClicked({{$article->id}})">
                                                     @if (Auth::user())
@@ -116,133 +128,56 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </div> 
+                                    </div>
+                                    <!-- ##### Advert Add Area Start ##### -->
+                                    @if ($key % 2)
+                                        <div class="row">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="footer-add">
+                                                            <a href="#"><img src="{{asset('site/img/bg-img/footer-add.gif')}}" alt=""></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <br>
+                                    <!-- ##### Advert Add Area End ##### --> 
                                 @endif
                             @endforeach
                         </div>
 
                         <nav aria-label="Page navigation example">
-                            <ul class="pagination mt-50">
-                                <li class="page-item active"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">1</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">2</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">3</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">4</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">5</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">...</a></li>
-                                <li class="page-item"><a class="page-link" href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">10</a></li>
-                            </ul>
+                            {{$articles->links()}}
                         </nav>
                     </div>
                     @php
                         include_once('includes/get_random_latest.php');
                     @endphp
                     <div class="col-12 col-lg-4">
-                        <div class="blog-sidebar-area">
-
-                            <!-- Latest Posts Widget -->
-                            {{-- <div class="latest-posts-widget mb-50">
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/19.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Finance</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/20.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Politics</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Sed a elit euismod augue semper congue sit amet ac sapien.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/21.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Health</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/22.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Finance</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Augue semper congue sit amet ac sapien. Fusce consequat.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/23.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Travel</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Featured Post -->
-                                <div class="single-blog-post small-featured-post d-flex">
-                                    <div class="post-thumb">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}"><img src="{{asset('site/img/bg-img/24.jpg')}}" alt=""></a>
-                                    </div>
-                                    <div class="post-data">
-                                        <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-catagory">Politics</a>
-                                        <div class="post-meta">
-                                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}" class="post-title">
-                                                <h6>Augue semper congue sit amet ac sapien. Fusce consequat.</h6>
-                                            </a>
-                                            <p class="post-date"><span>7:00 AM</span> | <span>April 14</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                            <!-- Popular News Widget -->
-                            @if (count($latest_articles)>1)
                         <div class="section-heading">
                             <h6 class="rect-box-headline">Info</h6>
+                        </div>
+                        {{--Blog links --}}
+                        <div class="popular-news-widget newsletter-widget mb-30">
+                            <h4 style="color: white">Blog Links</h4>
+                            <div class="nav">
+                                @php
+                                    include_once('includes/get_blog_links.php');
+                                    include_once('includes/get_user_by_id.php');
+                                    
+                                @endphp
+                                @foreach (get_blog_links() as $key => $link)
+                                    <!-- Single Popular Blog -->
+                                    <div class="blog-links">
+                                        <a href="{{URL::to('blog/'.get_user_by_id($link->blog_owner_id)->name.'/'.$link->blog_name)}}">
+                                            {{$link->blog_name}}
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                         <!-- Popular News Widget -->
                         <div class="popular-news-widget mb-30">
@@ -253,69 +188,58 @@
                                     <a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">
                                     <h6><span>{{$key + 1}}.</span> {{$latest['article_title']}}</h6>
                                     </a>
-                                    {{-- <p>{{$latest['created_at']->diffforHumans()}}</p> --}}
+                                    <p>{{\Carbon\Carbon::parse($latest['created_at'])->diffforHumans()}}</p>
                                 </div>
                             @endforeach
                         </div>
-
+    
+                        <div class="popular-news-widget mb-30">
+                            <div class="main-container">
+                              <!-- Swiper -->
+                              @php
+                                    $side_adverts = App\Advert::where('position', 'side')->where('status','active')
+                                                    ->where('expired','no')->get();
+                                    
+                              @endphp
+                              <div class="swiper-container">
+                                <div class="swiper-wrapper" >
+                                    @foreach ($side_adverts as $advert)
+                                        <div class="swiper-slide">
+                                            <img class="slide-img" src="{{$advert->advert}}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                        </div>
                         <!-- Newsletter Widget -->
                         <div class="newsletter-widget">
                             <h4>Newsletter</h4>
-                            <p>Get our latest update by simply Subscribing to our Newsletter</p>
-                            <form action="#" method="post">
-                                <input type="text" name="text" placeholder="Name">
+                            <p>Get our latest updates by just Subscribing to our Newsletter</p>
+                            <form action="/subscribe-newsletter" method="post">
+                                @csrf
+                                <input type="text" name="name" placeholder="Name">
                                 <input type="email" name="email" placeholder="Email">
                                 <button type="submit" class="btn w-100">Subscribe</button>
                             </form>
                         </div>
-                    </div>
-                @endif
-
-                <!-- Latest Comments Widget -->
-                <div class="latest-comments-widget">
-                    <h3>Latest Comments</h3>
-
-                    <!-- Single Comments -->
-                    <div class="single-comments d-flex">
-                        <div class="comments-thumbnail mr-15">
-                            <img src="{{asset('site/img/bg-img/29.jpg')}}" alt="">
-                        </div>
-                        <div class="comments-text">
-                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                            <p>06:34 am, April 14, 2018</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Comments -->
-                    <div class="single-comments d-flex">
-                        <div class="comments-thumbnail mr-15">
-                            <img src="{{asset('site/img/bg-img/30.jpg')}}" alt="">
-                        </div>
-                        <div class="comments-text">
-                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                            <p>06:34 am, April 14, 2018</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Comments -->
-                    <div class="single-comments d-flex">
-                        <div class="comments-thumbnail mr-15">
-                            <img src="{{asset('site/img/bg-img/31.jpg')}}" alt="">
-                        </div>
-                        <div class="comments-text">
-                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                            <p>06:34 am, April 14, 2018</p>
-                        </div>
-                    </div>
-
-                    <!-- Single Comments -->
-                    <div class="single-comments d-flex">
-                        <div class="comments-thumbnail mr-15">
-                            <img src="{{asset('site/img/bg-img/32.jpg')}}" alt="">
-                        </div>
-                        <div class="comments-text">
-                            <a href="{{URL::to('articles/'.$article_type.'/'.$articles[0]->id)}}">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                            <p>06:34 am, April 14, 2018</p>
+                        <br>
+                        <div class="newsletter-widget mb-30">
+                            <div class="main-container">
+                              <!-- Swiper -->
+                              <div class="swiper-container">
+                                <div class="swiper-wrapper" >
+                                    @foreach ($side_adverts as $advert)
+                                        <div class="swiper-slide">
+                                            <img class="slide-img" src="{{$advert->advert}}">
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -329,16 +253,8 @@
         function handleLikeButtonClicked(id){
             event.preventDefault()
             var like_btn = document.getElementById('like-btn'+id);
-            // var like_btn2 = document.getElementById('like-2-btn'+id);
             var like_icon = document.getElementById('like-icon'+id);
-            // var like_icon2 = document.getElementById('like-2-icon'+id);
             var likes_container = document.getElementById('likes'+id);
-            // var likes_container2 = document.getElementById('likes-second'+id);
-            
-            // var like_btn = document.getElementById('like-btn'+id)
-            // var like_icon = document.getElementById('like-icon'+id)
-            // var likes_container = document.getElementById('likes'+id)
-            // console.log('like button clicked on ID:'+ id)
             var user_id = "{{Auth::user()->id}}"
             var url = like_btn.href
 

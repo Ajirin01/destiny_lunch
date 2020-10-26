@@ -1,6 +1,32 @@
 <?php
+    use Carbon\Carbon;
     include_once('includes/get_random_latest.php');
     include_once('includes/visitor_counter.php');
+
+    $countries = App\Country::all();
+    define("filename_country", "country_code_currency.json");
+    $json_country = file_get_contents(filename_country);
+    $article_index_country = json_decode($json_country);
+
+    
+    if(count($countries)>0){
+        ;
+    }else{
+        for($i=0; $i<count($article_index_country); $i++){
+            $name = $article_index_country[$i]->name;
+            $alpha2Code =  $article_index_country[$i]->alpha2Code;
+            $callingCodes = "+".$article_index_country[$i]->callingCodes[0];
+            $currencies = $article_index_country[$i]->currencies[0]->code;
+
+            if($currencies == null){
+                $currencies = "not specifed";
+            }else{
+                ;
+            }
+
+            App\Country::create(['name'=>$name, 'alpha2Code'=>$alpha2Code, 'callingCodes'=>$callingCodes, 'currencies'=>$currencies])->save();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +46,51 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{asset('site/style.css')}}">
+
+    <!-- swipper Stylesheet -->
+    <link rel="stylesheet" href="{{asset('site/css/swiper.min.css')}}">
+
+    <style>
+        .slide-img{
+          width: inherit;
+          height: inherit;
+        }
+    
+        .main-container{
+          width: 300px;
+          height: 300px;
+          position: relative;
+          margin: 0 auto;
+          /* margin-top: 10%; */
+          text-align: center;
+    
+        }
+        .swiper-container {
+          width: 100%;
+          height: 100%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .swiper-slide {
+          text-align: center;
+          font-size: 18px;
+          background: #fff;
+    
+          /* Center slide text vertically */
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+        }
+      </style>
 
 </head>
 
@@ -132,27 +203,27 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="/">Home</a></li>
+                                    <li><a href="/">Home</a></li>
                                     <li><a href="/about">About Us</a></li>
-                                    <li><a href="#">Discover Nigeria</a></li>
-                                    <li><a href="#">Business Opportunities</a></li>
+                                    <li><a href="/discover-nigeria">Discover Nigeria</a></li>
+                                    <li><a href="/articles/business-development">Business Opportunities</a></li>
                                     <li><a href="/contact">Contact Us</a></li>
                                     <li><a href="#">Mega Menu</a>
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
-                                                <li><a href="/articles/know-about-nigeria">Lifestyles</a></li>
-                                                <li><a href="/articles/invest-in-nigeria">Nutrition & Health</a></li>
-                                                <li><a href="/articles/know-about-nigeria">Nigerians at Home Achievers</a></li>
+                                                <li><a href="/articles/lifestyles">Lifestyles</a></li>
+                                                <li><a href="/articles/nutrition-and-health">Nutrition & Health</a></li>
+                                                <li><a href="/articles/homes-and-properties">Homes & Property</a></li>
                                                 <li><a href="/articles/nigerians-at-home-achievers">Nigerians in Diaspora Achievers</a></li>
                                                 <li><a href="/articles/political-new">Notable Profiles</a></li>
                                                 <li><a href="/articles/beauty-and-health">Regional Updates</a></li>
-                                                <li><a href="/articles/business-enhancement">Disapora Updates</a></li>
+                                                <li><a href="/articles/business-enhancement">diaspora Updates</a></li>
                                                 <li><a href="/articles/inspiration">Global Updates</a></li>
-                                                <li><a href="/articles/empowerment-project"> Eminent Disapora Profile</a></li>
+                                                <li><a href="/articles/empowerment-project"> Eminent diaspora Profile</a></li>
                                                 <li><a href="/articles/tourism-events">Tribes & Culture</a></li>
                                             </ul>
                                             <ul class="single-mega cn-col-4">
-                                                <li><a href="catagories-post.html">Beauty & fashion</a></li>
+                                                <li><a href="/articles/beauty-and-fashion">Beauty & fashion</a></li>
                                                 <li><a href="single-post.html">Homes & Properties</a></li>
                                                 <li><a href="catagories-post.html">Agriculture</a></li>
                                                 <li><a href="single-post.html">Mineral Resources</a></li>
@@ -225,7 +296,7 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                            <a href="/articles/homes-and-properties" class="post-catagory">Homes & Properties</a>
+                            <a href="/articles/homes-and-properties" class="post-catagory">Homes & Property</a>
                         </div>
                     </div>
 
@@ -275,13 +346,19 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                            <a href="/articles/DNDP-Initiatives" class="post-catagory">"DNDP" Initiatives</a>
+                            <a href="/articles/destiny-nigeria-development-projects-initiatives" class="post-catagory">"DNDP" Initiatives</a>
                         </div>
                     </div>
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
                         <a href="/place-your-adverts" class="post-catagory">Place Your Adverts</a>
+                        </div>
+                    </div>
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post small-featured-post d-flex">
+                        <div class="post-data">
+                        <a href="/quality-education" class="post-catagory">Quality Education</a>
                         </div>
                     </div>
                     
@@ -300,7 +377,7 @@
                                                     <div><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers')}}"> Nigerians in Diaspora Achievers</a></div>
                                                     <div><a href="{{URL::to('articles/notable-profiles')}}">Notable Profiles </a></div>
                                                     <div><a href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></div>
-                                                    <div class=""><a href="{{URL::to('articles/disapora-updates')}}">Disapora Updates </a></div>
+                                                    <div class=""><a href="{{URL::to('articles/disapora-updates')}}">diaspora Updates </a></div>
                                                     <div><a href="{{URL::to('articles/global-updates')}}"> Global Updates </a></div>
                                                     <div><a href="{{URL::to('articles/tribes-and-culture')}}"> Tribes & Culture </a></div>
                                                     <div ><a href="{{URL::to('articles/agriculture')}}">Agriculture </a></div>
@@ -315,7 +392,8 @@
                                                     <div><a style="padding: 5px 21px"  href="{{URL::to('articles/invest-in-nigeria')}}">Invest in Nigeria </a></div>
                                                     <div><a style="padding: 5px 20px"  href="{{URL::to('articles/not-for-profits')}}">Not-for-Profits</a></div>
                                                     <div ><a style="padding: 5px 18px"  href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></div>
-                                                    <div ><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP initiatives</a></div>
+                                                    <div ><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP" initiatives</a></div>
+                                                    <div ><a href="{{URL::to('blog/create')}}">Create Your own Blog</a></div>
                                                     
                                             </div>
                                         </div>
@@ -332,7 +410,7 @@
                                         <!-- Breaking News Widget -->
                                         <div class="breaking-news-area d-flex align-items-top">
                                             <div class="news-title yellow-rect-box">
-                                                <p class="yellow-rect-box">Breaking News</p>
+                                                <p class="yellow-rect-box">Latest Update</p>
                                             </div>
                                             <div id="breakingNewsTicker" class="ticker">
                                                 <ul>
@@ -346,7 +424,7 @@
                                         <!-- Breaking News Widget -->
                                         <div class="breaking-news-area d-flex align-items-center mt-15">
                                             <div class="news-title title2 yellow-rect-box">
-                                                <p class="yellow-rect-box">International</p>
+                                                <p class="yellow-rect-box">Popular Update</p>
                                             </div>
                                             <div id="internationalTicker" class="ticker">
                                                 <ul>
@@ -380,17 +458,28 @@
     </div>
 
     <!-- ##### Footer Add Area Start ##### -->
-    <div class="footer-add-area">
+    <br><br>
+    <div class="col-12">
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="footer-add">
-                        <a href="#"><img src="{{asset('site/img/bg-img/footer-add.gif')}}" alt=""></a>
+            <div class="row justify-content-center">
+                <!-- Single Video Post -->
+                <div class="col-8 justify-content-center">
+                    <h4 class="text-center"> You May Also Like</h4>
+                    @php
+                        $external_links = App\ExternalLinks::all();
+                    @endphp
+                    <div class="nav justify-content-center">
+                        @foreach ($external_links as $link)
+                            <div class="blog-links text-center">
+                                <a style="color: white" href="//{{$link->link_url}}">{{$link->link_name}}</a>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br><br>
     <!-- ##### Footer Add Area End ##### -->
 
     <!-- ##### Footer Area Start ##### -->
@@ -517,5 +606,26 @@
     <script src="{{asset('site/js/plugins/plugins.js')}}"></script>
     <!-- Active js -->
     <script src="{{asset('site/js/active.js')}}"></script>
+    <!-- swipper js -->
+    <script src="{{asset('site/js/swiper.min.js')}}"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          autoplay: {
+            delay: 2000,
+            disableOnInteraction: false,
+        },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      </script> 
 </body>
 </html>

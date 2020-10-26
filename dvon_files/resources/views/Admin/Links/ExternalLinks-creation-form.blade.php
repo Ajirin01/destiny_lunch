@@ -28,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 offset-lg-2">
-            <form action="{{ route('external_links.store') }}" method="POST">
+            <form action="{{ route('external-links.store') }}" method="POST">
                 @csrf
                     <div id="form">
                         
