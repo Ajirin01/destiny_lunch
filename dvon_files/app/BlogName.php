@@ -10,6 +10,8 @@ class BlogName extends Model
         'blog_owner_id',
         'blog_name',
         'blog_logo',
+        'blog_reference',
+        'subscription_id',
         'blog_status',
         'expired',
     ];

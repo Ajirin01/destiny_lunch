@@ -38,8 +38,13 @@
                     <input class="form-control" type="file" name="blog_logo" required>
                 </div>
             </div>
+            <span class="text-danger text-center">Total of NGN200 would be charged</span>
+            <input type="hidden" name="name" placeholder="Plan Name" value="Blog Ownership Subscription"/>
+            <input type="hidden" name="amount" placeholder="Amount" id="total_advert_price" value="200"/>
+            <input type="hidden" name="interval" placeholder="Interval" value="monthly"/>
+            <input type="hidden" name="duration" placeholder="Duration" value="1"/>
             <div class="m-t-20 text-center">
-                <button class="btn btn-primary submit-btn">Create Blog</button>
+                <button class="btn btn-primary submit-btn">Checkout</button>
             </div>
         </form>
         </div>

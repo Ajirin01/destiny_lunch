@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function(){
         // Route::resource('country', 'Admin\countriesController');
         Route::resource('external-links', 'Admin\linksController')->middleware('admin');
         // Route::resource('blog', 'Admin\blogController')->middleware('admin');
-        Route::resource('blog-post', 'Admin\blogPostController')->middleware('admin');
+        Route::resource('blog-post', 'Admin\blogPostController')->middleware('admin')->middleware('author');
         Route::resource('article', 'Admin\articleController')->middleware('admin');
         Route::resource('profile', 'Admin\profileController')->middleware('admin');
 }); 
@@ -89,7 +89,13 @@ Route::get('/updatepaymentplans/{id}/{name}', 'RaveController@fetchPaymentPlan')
 Route::post('/advert/paymentplans/create', 'AdvertRaveController@createPaymentPlan')->name('advertcreatepaymentplan');
 Route::post('/advert/pay', 'AdvertRaveController@initialize')->name('advertpay');
 Route::get('/advert/rave/callback', 'AdvertRaveController@callback')->name('advertcallback');
-Route::get('/updateadvertpaymentplans/{id}/{name}', 'AdvertRaveController@fetchPaymentPlan')->name('fetchPaymentPlan');
+Route::get('/updateadvertpaymentplans/{id}/{name}', 'AdvertRaveController@fetchPaymentPlan')->name('advertfetchPaymentPlan');
+
+// payments route for blog
+Route::post('/blogpaymentplans/create', 'BlogRaveController@createPaymentPlan')->name('blogcreatepaymentplan');
+Route::post('/blogpay', 'BlogRaveController@initialize')->name('blogpay');
+Route::get('/blograve/callback', 'BlogRaveController@callback')->name('blogcallback');
+Route::get('/updateblogpaymentplans/{id}/{name}', 'BlogRaveController@fetchPaymentPlan')->name('blogfetchPaymentPlan');
 
 Route::get('/test-flutter', function(){
     return view('site.test_flutter');

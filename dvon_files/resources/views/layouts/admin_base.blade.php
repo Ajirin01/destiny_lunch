@@ -69,71 +69,73 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="menu-title">Main</li>
-                        <li class="active">
-                            <a href="{{ url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
-                        </li>
-                        {{-- <li>
-                            <a href="{{ route('country.index') }}"><i class="fa fa-group"></i> <span>Countries</span></a>
-                        </li> --}}
-                        <li>
-                            <a href="{{ route('external-links.index') }}"><i class="fa fa-group"></i> <span>External links</span></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('blog-post.index') }}"><i class="fa fa-group"></i> <span>Blog Posts</span></a>
-                        </li>
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Newsletter</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="{{ url('admin/newsletters') }}">Newsletter Subscribers</a></li>
-                                <li><a href="{{ url('admin/newsletters/send-newsletters/form') }}">Send Newsletter</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ route('users.index') }}"><i class="fa fa-group"></i> <span>Users</span></a>
-                        </li>
-                        <li>
-                            <a href="{{ route('adverts.index') }}"><i class="fa fa-book"></i> <span>adverts</span></a>
-                        </li>
-                        
-                        <li>
+                        @can('isAdmin')
+                            <li class="active">
+                                <a href="{{ url('admin/dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            </li>
+                            {{-- <li>
+                                <a href="{{ route('country.index') }}"><i class="fa fa-group"></i> <span>Countries</span></a>
+                            </li> --}}
+                            <li>
+                                <a href="{{ route('external-links.index') }}"><i class="fa fa-group"></i> <span>External links</span></a>
+                            </li>
                             
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="{{ route('article.create') }}">Add Article</a></li>
-                                <li class="submenu">
-                                    <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles List </span> <span class="menu-arrow"></span></a>
-                                    <ul style="display: none;">
-                                        <?php
-                                            define("filenameA", "article_index.json");
-                                            $json = file_get_contents(filenameA);
-                                            $article_index = json_decode($json);
-                                            function getArticleIndex($article_index, $index){
-                                                $article_at_index = $article_index[$index];
-                                                $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
-                                                $data = array('type'=>$article_at_index, 'title'=>$article_title);
-                                                return $data;
-                                            }
-                                            for($i = 0; $i< count($article_index); $i++){
-                                                echo "
-                                                <li onclick=' this.children[0].submit();'>
-                                                    <form action='".route('article.index')."' method='GET'>
-                                                        <input type='hidden' name='article_type' value='".getArticleIndex($article_index, $i)['type']."'>
-                                                    </form>
-                                                    <a href='".getArticleIndex($article_index, $i)['type']."' onclick=' event.preventDefault();'>
-                                                        ".getArticleIndex($article_index, $i)['title']."
-                                                    </a>
-                                                </li>
-                                                ";
-                                            }
-                                        ?>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="{{ url('admin/calender')}}"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
-                        </li>
+                            <li class="submenu">
+                                <a href="#"><i class="fa fa-commenting-o"></i> <span> Newsletter</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="{{ url('admin/newsletters') }}">Newsletter Subscribers</a></li>
+                                    <li><a href="{{ url('admin/newsletters/send-newsletters/form') }}">Send Newsletter</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="{{ route('users.index') }}"><i class="fa fa-group"></i> <span>Users</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('adverts.index') }}"><i class="fa fa-book"></i> <span>adverts</span></a>
+                            </li>
+                            
+                            <li>
+                                
+                            <li class="submenu">
+                                <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles</span> <span class="menu-arrow"></span></a>
+                                <ul style="display: none;">
+                                    <li><a href="{{ route('article.create') }}">Add Article</a></li>
+                                    <li class="submenu">
+                                        <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles List </span> <span class="menu-arrow"></span></a>
+                                        <ul style="display: none;">
+                                            <?php
+                                                define("filenameA", "article_index.json");
+                                                $json = file_get_contents(filenameA);
+                                                $article_index = json_decode($json);
+                                                function getArticleIndex($article_index, $index){
+                                                    $article_at_index = $article_index[$index];
+                                                    $article_title = strtoupper(preg_replace("/-/"," ",$article_at_index));
+                                                    $data = array('type'=>$article_at_index, 'title'=>$article_title);
+                                                    return $data;
+                                                }
+                                                for($i = 0; $i< count($article_index); $i++){
+                                                    echo "
+                                                    <li onclick=' this.children[0].submit();'>
+                                                        <form action='".route('article.index')."' method='GET'>
+                                                            <input type='hidden' name='article_type' value='".getArticleIndex($article_index, $i)['type']."'>
+                                                        </form>
+                                                        <a href='".getArticleIndex($article_index, $i)['type']."' onclick=' event.preventDefault();'>
+                                                            ".getArticleIndex($article_index, $i)['title']."
+                                                        </a>
+                                                    </li>
+                                                    ";
+                                                }
+                                            ?>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endcan
+                        @can('isAuthor')
+                            <li>
+                                <a href="{{ route('blog-post.index') }}"><i class="fa fa-group"></i> <span>Blog Posts</span></a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </div>

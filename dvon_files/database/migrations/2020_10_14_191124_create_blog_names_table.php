@@ -18,6 +18,8 @@ class CreateBlogNamesTable extends Migration
             $table->string('blog_owner_id');
             $table->string('blog_name');
             $table->string('blog_logo');
+            $table->string('blog_reference')->nullable();
+            $table->integer('subscription_id')->nullable();
             $table->string('blog_status')->nullable();
             $table->string('expired')->nullable();
             $table->timestamps();

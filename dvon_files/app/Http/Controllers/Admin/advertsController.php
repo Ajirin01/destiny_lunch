@@ -79,9 +79,9 @@ class advertsController extends Controller
                     
                     // dd($data);
 
-                    $temp_data = TempData::where('email',Auth::user()->email)->get();
+                    $temp_data = TempData::where('email',Auth::user()->email)->first();
 
-                    if(count(json_decode($temp_data))>0){
+                    if($temp_data != null){
                         $temp_data->update(['advert_set_reference'=>$advert_set_reference, 'subscription_id'=>$data->id]);
                     }else{
                         TempData::create(['email'=>Auth::user()->email,'advert_set_reference'=>$advert_set_reference, 'subscription_id'=>$data->id])->save();

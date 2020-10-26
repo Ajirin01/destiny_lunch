@@ -1,36 +1,41 @@
 <?php
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Http\Request;
 use App\Article as Article;
-use App\TempData as TempData;
+use App\BlogTempData as TempData;
 use App\User as User;
-use Illuminate\Support\Facades\Auth as Auth;
+use App\Blog as Blog;
+use DB;
+
 
 //use the Rave Facade
 use Rave;
 
-class RaveController extends Controller
+class BlogRaveController extends Controller
 {
   /**
    * Create Rave subscription
    * @return void
    */
-  public function createPaymentPlan()
+  public function createPaymentPlan(Request $request)
   {
     $data = Rave::createPaymentPlan();
 
     
     $data = $data->data;
+    
+    // dd($data);
 
     $temp_data = TempData::where('email',Auth::user()->email)->first();
 
     if($temp_data != null){
-      $temp_data->update(['subscription_id'=>$data->id])->save();
+      $temp_data->update(['temp_data'=>json_encode($request->all()), 'subscription_id'=>$data->id]);
     }else{
-      TempData::create(['email'=>Auth::user()->email, 'subscription_id'=>$data->id]);
+      TempData::create(['email'=>Auth::user()->email,'temp_data'=>json_encode($request->all()), 'subscription_id'=>$data->id])->save();
     }
-    return view('site.pay', ['sub_data'=>$data]);
+    return view('site.blog-pay', ['sub_data'=>$data]);
   }
   /**
    * Initialize Rave payment process
@@ -40,7 +45,7 @@ class RaveController extends Controller
   {
     //This initializes payment and redirects to the payment gateway
     //The initialize method takes the parameter of the redirect URL
-    Rave::initialize(route('callback'));
+    Rave::initialize(route('blogcallback'));
   }
 
   /**
@@ -57,16 +62,18 @@ class RaveController extends Controller
     // dd($data);
     $payment_status = $data->status;
     $email =  $data->data->custemail;
-    $subscription_id = TempData::where('email',$email)->first()->subscription_id;
+    $temp_data = TempData::where('email',$email)->first();
     $user = User::where('email', $email)->first();
 
+
     if($payment_status == 'success'){
-      $user->subscription_id = $subscription_id;
-      $user->subscribed = true;
-      $user->save();
-      return view('site.payment-complete');
+        DB::table('blog_names')->where('blog_reference', $temp_data->blog_reference)
+        ->update(array('subscription_id' => $temp_data->subscription_id, 'expired'=> 'no'));
+        // Blog::where('blog_reference', $temp_data->blog_reference)->update(['subscription_id '=>$temp_data->subscription_id ]);
+        
+        return view('site.payment-complete');
     }else{
-      echo "error occurred";
+        echo "Whoops! Payment was not successful";
     }
   }
 
@@ -74,18 +81,7 @@ class RaveController extends Controller
   {
     $data = Rave::fetchPaymentPlan($id, $q);
 
-    dd($data->data->paymentplans[0]);
+    // dd($data);
     return $data->data->paymentplans[0];
-  }
-  public function updateSubStatus(){
-    $users = User::all();
-    
-    if(count($articles)>0){
-      foreach ($users as $key => $user) {
-        $sub = RaveController::fetchPaymentPlan($user->subscription_id, 'Subscription to read articles');
-        $user->subscription_id = $sub->status;
-        $user->save();
-      }
-    }
   }
 }

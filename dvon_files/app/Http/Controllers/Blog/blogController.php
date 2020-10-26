@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Blog as Blog;
 use App\BlogName as Slug;
+use App\BlogTempData as TempData;
+use App\User as User;
+use Rave;
+
 use Validator;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +31,7 @@ class blogController extends Controller
 
     public function create_blog(Request $request){
         $Slug = new Slug;
-
+        $blog_reference = 'blog_'.rand(123456789,999999999).'_ref';
         $rules = [
             'blog_name'=>'required|min:3|max:100',
             'blog_logo'=> 'required',
@@ -57,11 +61,27 @@ class blogController extends Controller
                     $create_blog_name = Slug::create([
                         'blog_owner_id'=>$user_id,
                         'blog_name'=>$blog_name,
+                        'blog_reference'=> $blog_reference,
+                        'blog_status'=> 'active',
                         'blog_logo'=>$blog_logo,]);
         
                     if($create_blog_name->save()){
                         // $image->move($upload_path, $image_name);
-                        return redirect()->back()->with('msg','Blog Name was successfully created!');
+                        $data = Rave::createPaymentPlan();
+    
+                        $data = $data->data;
+                        
+                        // dd($data);
+
+                        $temp_data = TempData::where('email',Auth::user()->email)->first();
+
+                        if($temp_data != null){
+                            $temp_data->update(['blog_reference'=>$blog_reference, 'subscription_id'=>$data->id]);
+                        }else{
+                            TempData::create(['email'=>Auth::user()->email,'blog_reference'=>$blog_reference, 'subscription_id'=>$data->id])->save();
+                        }
+                        return view('site.blog-pay', ['sub_data'=>$data]);
+                        // return redirect()->back()->with('msg','Blog Name was successfully created!');
                     }
                 }
             }else{
