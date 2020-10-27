@@ -51,6 +51,21 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Subscription Required?</label>
+                        @if(session('errors'))
+                        <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>
+                        @endif
+                        <select name="paid" class="form-control" id="">
+                            @if ($article->paid == true)
+                                <option value="1">Yes</option>
+                            @else
+                                <option value="0">No</option>
+                            @endif
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label>Article Title</label>
                         @if(session('errors'))
                         <div class="text text-danger">{{session('errors')->first('article_title')}}*</div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Blog as Blog;
 use App\BlogName as Slug;
 use Validator;
+use Illuminate\Support\Facades\Auth as Auth;
 use	Illuminate\Support\Facades\Storage;
 
 class blogPostController extends Controller
@@ -14,7 +15,7 @@ class blogPostController extends Controller
     public function index()
     {
         $Blog = new Blog;
-        $all_posts = Blog::paginate(9);
+        $all_posts = Blog::where('blog_owner_id', Auth::user()->id)->paginate(9);
         return view('Admin.Blog.blog-dashboard',['posts'=>$all_posts]);
     }
 

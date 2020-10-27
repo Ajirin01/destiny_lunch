@@ -64,6 +64,7 @@ class articleController extends Controller
             'article_type'=>'required',
             'article_title'=> 'required|min:10|max:20000',
             'article_intro_image'=> 'required',
+            'paid'=> 'required',
             'article_intro'=> 'required|min:100|max:20000',
             'article_description'=> 'required|min:200|max:2000000000',
         ];
@@ -86,6 +87,7 @@ class articleController extends Controller
                 $article_intro_image = "/dvon_files/public/uploads/".$image_name;
                 $article_intro = $request->get('article_intro');
                 $article_description = $request->get('article_description');
+                $paid = $request->get('paid');
     
                 $create_article_article = Article::create([
                     'article_type'=>$article_type,
@@ -93,6 +95,7 @@ class articleController extends Controller
                     'article_intro_image'=>$article_intro_image,
                     'article_description_images_array'=>json_encode($image_src),
                     'article_intro'=>$article_intro, 
+                    'paid'=> $paid,
                     'article_description'=>$article_description]);
     
                 if($create_article_article->save()){
@@ -124,6 +127,7 @@ class articleController extends Controller
         $rules = [
             'article_type'=>'required',
             'article_title'=> 'required|min:10|max:100',
+            'paid'=> 'required',
             'article_intro'=> 'required|min:100|max:20000',
             'article_description'=> 'required|min:200|max:2000000000',
         ];
@@ -147,6 +151,7 @@ class articleController extends Controller
                 $article_intro_image = "/dvon_files/public/uploads/".$image_name;
                 $article_intro = $request->get('article_intro');
                 $article_description = $request->get('article_description');
+                $paid = $request->get('paid');
     
                 $update_article_article = $article->update([
                     'article_type'=>$article_type,
@@ -154,6 +159,7 @@ class articleController extends Controller
                     'article_intro_image'=>$article_intro_image,
                     'article_description_images_array'=>json_encode($image_src),
                     'article_intro'=>$article_intro, 
+                    'paid'=> $paid,
                     'article_description'=>$article_description]);
     
                 if($update_article_article){
@@ -165,12 +171,14 @@ class articleController extends Controller
                 $article_intro_image = $article->article_intro_image;
                 $article_intro = $request->get('article_intro');
                 $article_description = $request->get('article_description');
+                $paid = $request->get('paid');
     
                 $update_article_article = $article->update([
                     'article_type'=>$article_type,
                     'article_title'=>$article_title,
                     'article_intro_image'=>$article_intro_image,
                     'article_intro'=>$article_intro, 
+                    'paid'=> $paid,
                     'article_description'=>$article_description]);
                 return redirect()->back()->with('msg','Article was updated successfully!');
             }

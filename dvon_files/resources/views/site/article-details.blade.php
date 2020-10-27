@@ -35,35 +35,42 @@
 
                         <div class="row">
                             <div class="col-12">
-                                @if (!Auth::user()->subscribed)
-                                    <div>
-                                        <div class="article-items" style="word-break: break-word" id="article-details">
-                                            <?php echo substr($article[0]->article_description,0,500)?>...
-                                        </div>
-                                        <div class="article-items">
-                                            <h6 class="text-center text-danger">
-                                                "Ops! you do not have active subscription, please subscribe to read full content and enjoy unlimited access at <span class="text-primary">*** NGN</span><span class="text-primary"> 600 *** </span> only" 
-                                            </h6>
-                                        </div>
-                                        <form method="POST" action="{{ route('createpaymentplan') }}" id="paymentForm">
-                                            @csrf
-                                            <input type="hidden" name="name" placeholder="Plan Name" value="Subscription to read articles"/>
-                                            <input type="hidden" name="amount" placeholder="Amount" value="600"/>
-                                            <input type="hidden" name="interval" placeholder="Interval" value="monthly"/>
-                                            <input type="hidden" name="duration" placeholder="Duration" value="1"/> <!-- Uncomment if you want to add a duration -->
-                                            {{-- <input type="submit" value="Create"  /> --}}
-                                            <div class="m-t-20 text-center">
-                                                <input type="submit" value="Subscribe"  class="site-btn"/>
+                                @if ($article[0]->paid)
+                                    @if (!Auth::user()->subscribed)
+                                        <div>
+                                            <div class="article-items" style="word-break: break-word" id="article-details">
+                                                <?php echo substr($article[0]->article_description,0,500)?>...
                                             </div>
-                                        </form>
+                                            <div class="article-items">
+                                                <h6 class="text-center text-danger">
+                                                    "Ops! you do not have active subscription, please subscribe to read full content and enjoy unlimited access at <span class="text-primary">*** NGN</span><span class="text-primary"> 600 *** </span> only" 
+                                                </h6>
+                                            </div>
+                                            <form method="POST" action="{{ route('createpaymentplan') }}" id="paymentForm">
+                                                @csrf
+                                                <input type="hidden" name="name" placeholder="Plan Name" value="Subscription to read articles"/>
+                                                <input type="hidden" name="amount" placeholder="Amount" value="600"/>
+                                                <input type="hidden" name="interval" placeholder="Interval" value="monthly"/>
+                                                <input type="hidden" name="duration" placeholder="Duration" value="1"/> <!-- Uncomment if you want to add a duration -->
+                                                {{-- <input type="submit" value="Create"  /> --}}
+                                                <div class="m-t-20 text-center">
+                                                    <input type="submit" value="Subscribe"  class="site-btn"/>
+                                                </div>
+                                            </form>
 
-                                        
-                                    </div>
+                                            
+                                        </div>
+                                    @else
+                                        <div class="article-items" style="word-break: break-word" id="article-details">
+                                            <?php echo $article[0]->article_description;?>
+                                        </div>
+                                    @endif
                                 @else
                                     <div class="article-items" style="word-break: break-word" id="article-details">
                                         <?php echo $article[0]->article_description;?>
                                     </div>
                                 @endif
+                                
                                 
                                 <br><br>
                                 <a href="{{URL::to('articles/'.$article_type)}}" class="btn btn-primary">

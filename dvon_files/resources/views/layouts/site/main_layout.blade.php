@@ -214,43 +214,41 @@
                                                 <li><a href="/articles/lifestyles">Lifestyles</a></li>
                                                 <li><a href="/articles/nutrition-and-health">Nutrition & Health</a></li>
                                                 <li><a href="/articles/homes-and-properties">Homes & Property</a></li>
-                                                <li><a href="/articles/nigerians-at-home-achievers">Nigerians in Diaspora Achievers</a></li>
-                                                <li><a href="/articles/political-new">Notable Profiles</a></li>
-                                                <li><a href="/articles/beauty-and-health">Regional Updates</a></li>
-                                                <li><a href="/articles/business-enhancement">diaspora Updates</a></li>
-                                                <li><a href="/articles/inspiration">Global Updates</a></li>
-                                                <li><a href="/articles/empowerment-project"> Eminent diaspora Profile</a></li>
-                                                <li><a href="/articles/tourism-events">Tribes & Culture</a></li>
+                                                <li><a href="/articles/love-and-relationships">Love & Relationships</a></li>
+                                                <li><a href="/articles/marriage-corner">Marriage Corner</a></li>
+                                                <li><a href="/articles/family-and-parenting">Family & Parenting</a></li>
+                                                <li><a href="/articles/career-development">Career Development</a></li>
+                                                <li><a href="/articles/business-development">Business Development</a></li>
                                             </ul>
                                             <ul class="single-mega cn-col-4">
-                                                <li><a href="/articles/beauty-and-fashion">Beauty & fashion</a></li>
-                                                <li><a href="single-post.html">Homes & Properties</a></li>
-                                                <li><a href="catagories-post.html">Agriculture</a></li>
-                                                <li><a href="single-post.html">Mineral Resources</a></li>
-                                                <li><a href="about.html">Tourism</a></li>
-                                                <li><a href="contact.html">Business Supports</a></li>
-                                                <li><a href="">Agriculture</a></li>
-                                                <li><a href="">Industrial Development</a></li>
-                                                <li><a href="">Made in Nigeria Products</a></li>
-                                                <li><a href="">Exclusive Services</a></li>
+                                                <li><a href="/articles/entertainment">Entertainment</a></li>
+                                                <li><a href="/articles/sports">Sports</a></li>
+                                                <li><a href="{{URL::to('articles/nigerians-at-home-achievers')}}"> Nigerians at Home Achievers</a></li>
+                                                <li><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers')}}"> Nigerians in Diaspora Achievers</a></li>
+                                                <li><a href="{{URL::to('articles/notable-profiles')}}">Notable Profiles </a></li>
+                                                <li><a href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></li>
+                                                <li><a href="{{URL::to('articles/disapora-updates')}}">diaspora Updates </a></li>
+                                                <li><a href="{{URL::to('articles/global-updates')}}"> Global Updates </a></li>
                                             </ul>
                                             <ul class="single-mega cn-col-4">
-                                                <li><a href="">Love & Relationships</a></li>
-                                                <li><a href="catagories-post.html">Marriage Corner</a></li>
-                                                <li><a href="">Promotions</a></li>
-                                                <li><a href="/">Invest in Nigeria</a></li>
-                                                <li><a href="single-post.html">Not-for-Profits</a></li>
-                                                <li><a href="about.html">Humanitarian</a></li>
-                                                <li><a href="contact.html">Destiny Nigeria Development Projects "DNDP initiatives</a></li><br><br>
-                                                <li><a href="">join our Organization</a></li>
+                                                <li><a href="{{URL::to('articles/tribes-and-culture')}}"> Tribes & Culture </a></li>
+                                                <li><a href="{{URL::to('articles/agriculture')}}">Agriculture </a></li>
+                                                <li><a href="{{URL::to('articles/mineral-resources')}}">Mineral Resources</a></li>
+                                                <li><a href="{{URL::to('articles/tourism')}}">Tourism</a></li>
+                                                <li><a href="{{URL::to('articles/technology-tips')}}">Technology Tips</a></li>
+                                                <li><a href="{{URL::to('articles/business-supports')}}">Business Supports</a></li>
+                                                <li><a href="{{URL::to('articles/industrial-development')}}">Industrial Development</a></li>
+                                                <li><a href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></li>
                                             </ul>
                                             <ul class="single-mega cn-col-4">
-                                                <li><a href="">Family & Parenting</a></li>
-                                                <li><a href="catagories-post.html">Career Development</a></li>
-                                                <li><a href="">Entertainment</a></li>
-                                                <li><a href="/">Sports</a></li>
-                                                <li><a href="single-post.html">"DNDP" Initiatives</a></li>
-                                                <li><a href="about.html">Place Your Adverts</a></li>
+                                                <li><a href="{{URL::to('articles/exclusive-services')}}">Exclusive Services </a></li>
+                                                <li><a href="{{URL::to('articles/promotions')}}">Promotions</a></li>
+                                                <li><a href="{{URL::to('articles/invest-in-nigeria')}}">Invest in Nigeria </a></li>
+                                                <li><a href="{{URL::to('articles/not-for-profits')}}">Not-for-Profits</a></li>
+                                                <li><a href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></li>
+                                                <li><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP" initiatives</a></li>
+                                                <br><br>
+                                                <li><a href="{{URL::to('blog/create')}}">Create Your own Blog</a></li>
                                             </ul>
                                         </div>
                                     </li>
@@ -358,7 +356,7 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                        <a href="/quality-education" class="post-catagory">Quality Education</a>
+                        <a href="/articles/quality-education" class="post-catagory">Quality Education</a>
                         </div>
                     </div>
                     
@@ -513,10 +511,10 @@
                             <h4 class="widget-title">Hot Navs</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Contact us</a></li>
-                                <li><a href="#">Know about Nigeria</a></li>
-                                <li><a href="#">Invest in Nigeria</a></li>
-                                <li><a href="#">Place your adverts</a></li>
+                                <li><a href="/contact">Contact us</a></li>
+                                <li><a href="/discover-nigeria">Discover Nigeria</a></li>
+                                <li><a href="/articles/business-development">Business Opportunities</a></li>
+                                <li><a href="/place-your-adverts">Place Your Adverts</a></li>
                             </ul>
                         </div>
                     </div>
@@ -528,14 +526,15 @@
                             <h4 class="widget-title">Just For You</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Nutrition & Health</a></li>
-                                <li><a href="#">Beauty & fashion</a></li>
-                                <li><a href="#">Homes & Properties</a></li>
-                                <li><a href="#">Love & Relationships</a></li>
-                                <li><a href="#">Family & Parenting</a></li>
-                                <li><a href="#">Career Development</a></li>
-                                <li><a href="#">Business Development</a></li>
-                                <li><a href="#">"DNDP" Initiatives</a></li>
+                                <li><a href="/articles/lifestyles">Lifestyles</a></li>
+                                <li><a href="/articles/nutrition-and-health">Nutrition & Health</a></li>
+                                <li><a href="/articles/homes-and-properties">Homes & Property</a></li>
+                                <li><a href="/articles/love-and-relationships">Love & Relationships</a></li>
+                                <li><a href="/articles/marriage-corner">Marriage Corner</a></li>
+                                <li><a href="/articles/family-and-parenting">Family & Parenting</a></li>
+                                <li><a href="/articles/career-development">Career Development</a></li>
+                                <li><a href="/articles/entertainment">Entertainment</a></li>
+                                <li><a href="/articles/sports">Sports</a></li>
                             </ul>
                         </div>
                     </div>
@@ -563,13 +562,13 @@
                             <h4 class="widget-title">+More</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Discover Nigeria</a></li>
-                                <li><a href="#">Lifestyles</a></li>
-                                <li><a href="#"> Global Updates</a></li>
-                                <li><a href="#">Agriculture</a></li>
-                                <li><a href="#">Tourism</a></li>
-                                <li><a href="#">Entertainment</a></li>
-                                <li><a href="#">Sports</a></li>
+                                <li><a href="{{URL::to('articles/tribes-and-culture')}}">Tribes & Culture</a></li>
+                                <li><a href="{{URL::to('articles/agriculture')}}">Agriculture</a></li>
+                                <li><a href="{{URL::to('articles/mineral-resources')}}">Mineral Resources</a></li>
+                                <li><a href="{{URL::to('articles/tourism')}}">Tourism</a></li>
+                                <li><a href="{{URL::to('articles/technology-tips')}}">Technology Tips</a></li>
+                                <li><a href="{{URL::to('articles/business-supports')}}">Business Supports</a></li>
+                                <li><a href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></li>
                             </ul>
                         </div>
                     </div>

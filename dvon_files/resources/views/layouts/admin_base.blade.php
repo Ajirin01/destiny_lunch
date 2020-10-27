@@ -104,8 +104,8 @@
                                         <a href="#"><i class="fa fa-commenting-o"></i> <span> Articles List </span> <span class="menu-arrow"></span></a>
                                         <ul style="display: none;">
                                             <?php
-                                                define("filenameA", "article_index.json");
-                                                $json = file_get_contents(filenameA);
+                                                define("filenameB", "article_index.json");
+                                                $json = file_get_contents(filenameB);
                                                 $article_index = json_decode($json);
                                                 function getArticleIndex($article_index, $index){
                                                     $article_at_index = $article_index[$index];
