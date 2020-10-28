@@ -221,7 +221,7 @@
                         <div class="footer-widget-area mt-80">
                             <!-- Footer Logo -->
                             <div class="footer-logo">
-                                <a href="index.html"><img style="width: 250px; height: 70px" src="{{asset('site/img/core-img/destiny-logo.png')}}" alt=""></a>
+                                <a href="/"><img style="width: 250px; height: 70px" src="{{asset('site/img/core-img/destiny-logo.png')}}" alt=""></a>
                             </div>
                             <!-- List -->
                             <ul class="list">
@@ -236,13 +236,13 @@
                     <div class="col-12 col-sm-6 col-lg-2">
                         <div class="footer-widget-area mt-80">
                             <!-- Title -->
-                            <h4 class="widget-title">Politics</h4>
+                            <h4 class="widget-title">Hot Navs</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Markets</a></li>
-                                <li><a href="#">Tech</a></li>
-                                <li><a href="#">Luxury</a></li>
+                                <li><a href="/contact">Contact us</a></li>
+                                <li><a href="/discover-nigeria">Discover Nigeria</a></li>
+                                <li><a href="/articles/business-development">Business Opportunities</a></li>
+                                <li><a href="/place-your-adverts">Place Your Adverts</a></li>
                             </ul>
                         </div>
                     </div>
@@ -251,17 +251,18 @@
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="footer-widget-area mt-80">
                             <!-- Title -->
-                            <h4 class="widget-title">Featured</h4>
+                            <h4 class="widget-title">Just For You</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Football</a></li>
-                                <li><a href="#">Golf</a></li>
-                                <li><a href="#">Tennis</a></li>
-                                <li><a href="#">Motorsport</a></li>
-                                <li><a href="#">Horseracing</a></li>
-                                <li><a href="#">Equestrian</a></li>
-                                <li><a href="#">Sailing</a></li>
-                                <li><a href="#">Skiing</a></li>
+                                <li><a href="/articles/lifestyles">Lifestyles</a></li>
+                                <li><a href="/articles/nutrition-and-health">Nutrition & Health</a></li>
+                                <li><a href="/articles/homes-and-properties">Homes & Property</a></li>
+                                <li><a href="/articles/love-and-relationships">Love & Relationships</a></li>
+                                <li><a href="/articles/marriage-corner">Marriage Corner</a></li>
+                                <li><a href="/articles/family-and-parenting">Family & Parenting</a></li>
+                                <li><a href="/articles/career-development">Career Development</a></li>
+                                <li><a href="/articles/entertainment">Entertainment</a></li>
+                                <li><a href="/articles/sports">Sports</a></li>
                             </ul>
                         </div>
                     </div>
@@ -270,17 +271,14 @@
                     <div class="col-12 col-sm-4 col-lg-2">
                         <div class="footer-widget-area mt-80">
                             <!-- Title -->
-                            <h4 class="widget-title">FAQ</h4>
+                            <h4 class="widget-title">Contacts</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Aviation</a></li>
-                                <li><a href="#">Business</a></li>
-                                <li><a href="#">Traveller</a></li>
-                                <li><a href="#">Destinations</a></li>
-                                <li><a href="#">Features</a></li>
-                                <li><a href="#">Food/Drink</a></li>
-                                <li><a href="#">Hotels</a></li>
-                                <li><a href="#">Partner Hotels</a></li>
+                                <li><a href="#">FaceBook</a></li>
+                                <li><a href="#">Twitter</a></li>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">Linkedin</a></li>
+                                <li><a href="#">Google+</a></li>
                             </ul>
                         </div>
                     </div>
@@ -292,12 +290,13 @@
                             <h4 class="widget-title">+More</h4>
                             <!-- List -->
                             <ul class="list">
-                                <li><a href="#">Fashion</a></li>
-                                <li><a href="#">Design</a></li>
-                                <li><a href="#">Architecture</a></li>
-                                <li><a href="#">Arts</a></li>
-                                <li><a href="#">Autos</a></li>
-                                <li><a href="#">Luxury</a></li>
+                                <li><a href="{{URL::to('articles/tribes-and-culture')}}">Tribes & Culture</a></li>
+                                <li><a href="{{URL::to('articles/agriculture')}}">Agriculture</a></li>
+                                <li><a href="{{URL::to('articles/mineral-resources')}}">Mineral Resources</a></li>
+                                <li><a href="{{URL::to('articles/tourism')}}">Tourism</a></li>
+                                <li><a href="{{URL::to('articles/technology-tips')}}">Technology Tips</a></li>
+                                <li><a href="{{URL::to('articles/business-supports')}}">Business Supports</a></li>
+                                <li><a href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></li>
                             </ul>
                         </div>
                     </div>
@@ -312,8 +311,8 @@
                     <div class="col-12">
                         <!-- Copywrite -->
                         <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i></a>
-    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved <i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     </div>
                 </div>
             </div>
