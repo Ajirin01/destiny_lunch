@@ -171,8 +171,6 @@
                         <div class="nav">
                             @php
                                 include_once('includes/get_blog_links.php');
-                                include_once('includes/get_user_by_id.php');
-                                
                             @endphp
                             @foreach (get_blog_links() as $key => $link)
                                 <!-- Single Popular Blog -->
