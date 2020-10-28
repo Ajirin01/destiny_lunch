@@ -94,7 +94,7 @@
                             <br>
 
                             @php
-                                include_once('includes/get_user_by_id.php');
+                                include_once('includes/get_user_by_ID.php');
                             @endphp
 
                             @foreach ($comments as $comment)
