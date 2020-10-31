@@ -68,7 +68,7 @@
                     <!-- Single Post -->
                     @foreach ($random_articles as $key => $article)
                         <div class="row">
-                            <!-- Single Post -->
+                            <!-- Single Post comment-->
                             @if ($key > 0)
                                 <div class="col-12 col-md-6">
                                     <div class="single-blog-post style-3">
