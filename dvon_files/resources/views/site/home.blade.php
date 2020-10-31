@@ -153,8 +153,12 @@
                                     <div class="row">
                                         <div class="col-12 justify-content-center">
                                             <div class="footer-add">
-                                                <a href="#"><img src="{{App\Advert::where('position', 'center')->where('status','active')
-                                                    ->where('expired','no')->get()[0]->advert}}" alt=""></a>
+                                                <a href="#"><img src="<?php $advert = (App\Advert::where('position', 'center')->where('status','active')
+                                                                            ->where('expired','no')->inRandomOrder()->first());
+                                                                            if($advert != null){
+                                                                                echo $advert->advert;
+                                                                            }
+                                                                        ?>" alt=""></a>
                                             </div>
                                         </div>
                                     </div>
@@ -177,7 +181,7 @@
                         <div class="nav">
                             @php
                                 include_once('includes/get_blog_links.php');
-                                include_once('includes/get_user_by_id.php');
+                                include_once('includes/get_user_by_ID.php');
                                 
                             @endphp
                             @foreach (get_blog_links() as $key => $link)
