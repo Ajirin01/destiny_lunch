@@ -9,11 +9,6 @@ use Validator;
 
 class linksController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $ExternalLinks = new ExternalLinks;
