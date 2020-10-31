@@ -350,13 +350,13 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                        <a href="/place-your-adverts" class="post-catagory">Place Your Adverts</a>
+                        <a href="/articles/quality-education" class="post-catagory">Quality Education</a>
                         </div>
                     </div>
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
-                        <a href="/articles/quality-education" class="post-catagory">Quality Education</a>
+                        <a href="/place-your-adverts" class="post-catagory">Place Your Adverts</a>
                         </div>
                     </div>
                     
@@ -374,24 +374,26 @@
                                                     <div><a href="{{URL::to('articles/nigerians-at-home-achievers')}}"> Nigerians at Home Achievers</a></div>
                                                     <div><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers')}}"> Nigerians in Diaspora Achievers</a></div>
                                                     <div><a href="{{URL::to('articles/notable-profiles')}}">Notable Profiles </a></div>
-                                                    <div><a href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></div>
-                                                    <div class=""><a href="{{URL::to('articles/disapora-updates')}}">diaspora Updates </a></div>
+                                                    <div><a style="padding: 5px 12px" href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></div>
+                                                    <div><a href="{{URL::to('articles/disapora-updates')}}">diaspora Updates </a></div>
                                                     <div><a href="{{URL::to('articles/global-updates')}}"> Global Updates </a></div>
                                                     <div><a href="{{URL::to('articles/tribes-and-culture')}}"> Tribes & Culture </a></div>
                                                     <div ><a href="{{URL::to('articles/agriculture')}}">Agriculture </a></div>
                                                     <div ><a href="{{URL::to('articles/mineral-resources')}}">Mineral Resources</a></div>
-                                                    <div ><a href="{{URL::to('articles/tourism')}}">Tourism</a></div>
+                                                    <div ><a style="padding: 5px 12px" href="{{URL::to('articles/tourism')}}">Tourism</a></div>
                                                     <div ><a style="padding: 5px 19px" href="{{URL::to('articles/technology-tips')}}">Technology Tips</a></div>
                                                     <div ><a style="padding: 5px 19px" href="{{URL::to('articles/business-supports')}}">Business Supports</a></div>
                                                     <div ><a style="padding: 5px 19px" href="{{URL::to('articles/industrial-development')}}">Industrial Development</a></div>
-                                                    <div><a style="padding: 5px 17px" href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></div>
-                                                    <div ><a style="padding: 5px 21px" href="{{URL::to('articles/exclusive-services')}}">Exclusive Services </a></div>
-                                                    <div ><a style="padding: 5px 21px" href="{{URL::to('articles/promotions')}}">Promotions</a></div>
-                                                    <div><a style="padding: 5px 21px"  href="{{URL::to('articles/invest-in-nigeria')}}">Invest in Nigeria </a></div>
-                                                    <div><a style="padding: 5px 20px"  href="{{URL::to('articles/not-for-profits')}}">Not-for-Profits</a></div>
-                                                    <div ><a style="padding: 5px 18px"  href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></div>
+                                                    <div ><a style="padding: 5px 26px" href="{{URL::to('articles/education-development')}}">Education Development</a></div>
+                                                    <div ><a style="" href="{{URL::to('articles/energy-and-power')}}">Energy & Power</a></div>
+                                                    <div><a style="" href="{{URL::to('articles/made-in-nigeria-products')}}">Made in Nigeria Products </a></div>
+                                                    <div ><a style="padding: 5px 12px" href="{{URL::to('articles/exclusive-services')}}">Exclusive Services </a></div>
+                                                    <div ><a style="padding: 5px 15px" href="{{URL::to('articles/promotions')}}">Promotions</a></div>
+                                                    <div><a style="padding: 5px 15px"  href="{{URL::to('articles/invest-in-nigeria')}}">Invest in Nigeria </a></div>
+                                                    <div><a style=""  href="{{URL::to('articles/not-for-profits')}}">Not-for-Profits</a></div>
+                                                    <div ><a style=""  href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></div>
                                                     <div ><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP" initiatives</a></div>
-                                                    <div ><a href="{{URL::to('blog/create')}}">Create Your own Blog</a></div>
+                                                    <div ><a href="{{URL::to('blog/create')}}">Create Blog</a></div>
                                                     
                                             </div>
                                         </div>
