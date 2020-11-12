@@ -43,7 +43,7 @@
                         <h4>{{$latest_articles[0]['article_title']}}</h4>
                         <div class="post-meta">
                             <p class="post-author">
-                                <a class="text-danger" href="#">
+                                <a class="text-danger" href="{{URL::to('articles/'.$latest_articles[0]['article_type'].'/'.$latest_articles[0]['id'])}}">
                                     … Read Interview …
                                 </a>
                             </p>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="row">
                     <!-- Single Post -->
-                    @foreach ($random_articles as $key => $article)
+                    @foreach ($latest_articles as $key => $article)
                         <div class="row">
                             <!-- Single Post comment-->
                             @if ($key > 0)
@@ -97,7 +97,7 @@
                                     <div class="single-blog-post style-3">
                                         <div class="post-data">
                                             {{-- <br><br> --}}
-                                            <h4>{{$article['article_title']}}:</h4>
+                                            <h4 class="text-center" style="word-break: break-word">{{$article['article_title']}}:</h4>
                                             <div class="text-left" style="word-break: break-word; margin: 0 10px">
                                                 <?php echo substr($article['article_intro'],0,500)?>...
                                             </div>

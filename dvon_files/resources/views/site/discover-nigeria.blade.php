@@ -22,6 +22,56 @@
                     which presently provides for greater chunk of her GDP and National Income. 
 
                 </h5>
+                <br>
+                <h5>Discover More about Nigeria:</h5>
+                <div>
+                    <b>A) Facts and Figures: </b> 
+                    <p>Do you know that Lagos State, with her estimated bustling population of over 20
+                        Million people, occupies merely 3,671 Sq. km or 0.4% of landmass area out of Nigeria’s total of 923,768
+                        Sq. km?.
+                        In comparison, Niger State with a population of less than 4 Million people occupies 68,925 Sq. km or
+                        7.6% of landmass area out of Nigeria’s total of 923,768 Sq. km?.
+                        This makes Niger State more than 18 times the size of Lagos State.
+                    </p>
+                    <a class="text-danger text-center" href="{{URL::to('articles/regional-updates')}}">Read more in REGIONAL UPDATES</a>
+                </div>
+                <br>
+                <div>
+                    <b>B) Tribes and Culture: </b> 
+                    <p>Do you know that there are over 250 indigenous tribes and cultures in Nigeria today,
+                        with most of the none 3 major tribes (Igbo, Yoruba, Hausa / Fulani), found mainly in the South – South,
+                        North - Central, North - East and North - West Nigeria?
+                    </p>
+                    <a class="text-danger text-center" href="{{URL::to('articles/tribes-and-culture')}}">Read more in NIGERIA’S TRIBES AND CULTURE</a>
+                </div>
+                <br>
+                <div>
+                    <b>C) Agriculture: </b> 
+                    <p>Do you know that Nigeria is the highest producer of Rice in Africa and the highest producer
+                        of cassava all over the world?
+                    </p>
+                    <a class="text-danger text-center" href="{{URL::to('articles/agriculture')}}">Read more in NIGERIA’S AGRICULTURE</a>
+                </div>
+                <br>
+                <div>
+                    <b>D) Mineral Resources: </b> 
+                    <p>Do you know that Nigeria is Africa's largest oil producer and has been a member of
+                        the Organization of Petroleum Exporting Countries since 1971?
+                        The Nigerian economy is heavily dependent on the oil sector, which, accounts for over 95 percent of
+                        export earnings and about 40 percent of government revenues, according to the International Monetary
+                        Fund.
+                    </p>
+                    <a class="text-danger text-center" href="{{URL::to('articles/mineral-resources')}}">Read more in NIGERIA’S OIL & GAS / MINERAL RESOURCES</a>
+                </div>
+                <br>                
+                <div><b>E) Tourism: </b> 
+                    <p>Do you know that Nigeria has one of the richest tourism potentials in West Africa?
+                        Yet, the nation lags behind too far in generating the valuable foreign exchange that other less endowed
+                        African countries are generating yearly. There is so much to discover in Nigeria..
+                    </p>
+                    <a class="text-danger text-center" href="{{URL::to('articles/tourism')}}">Read more in NIGERIA’S TOURISM</a>
+                </div>
+                
                 {{-- <a href="/about"><h4 class="text-center" style="font-size:0.8rem">… Read more About Us …</h4></a> --}}
             </div>
 

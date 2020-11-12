@@ -1270,3 +1270,63 @@ textarea:focus {
 opacity: .5;
 cursor: pointer;
 }
+
+.lower-content-left{
+  width: 95%;
+  background-color: red;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px){
+  .lower-content-left {
+  float: left;
+  width: 69.5%;
+  background-color: red;
+  margin-top: 3%; } }
+
+.lower-content-right{
+  width: 95%;
+  background-color: greenyellow;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+@media only screen and (min-width: 768px) {
+  .lower-content-right{
+    float: right;
+    width: 28.5%;
+    background-color: green;
+    margin-top: 3%;
+  }} 
+
+  .lower-content-left-left{
+    width: 98%;
+    height: 400px;
+    background-color: purple;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .lower-content-left-left{
+      width: 48%;
+      height: 400px;
+      background-color: purple;
+      float: left;
+      margin-bottom: 4%;
+    }} 
+
+  .lower-content-left-right{
+    width: 98%;
+    height: 400px;
+    background-color: orange;
+    margin: 0 auto;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .lower-content-left-right{
+      width: 48%;
+      height: 400px;
+      background-color: orange;
+      float: right;
+      margin-bottom: 4%;
+    }} 
