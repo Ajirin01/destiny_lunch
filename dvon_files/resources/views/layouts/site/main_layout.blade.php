@@ -375,7 +375,7 @@
                                                     <div><a  href="{{URL::to('articles/nigerians-in-diaspora-achievers')}}"> Nigerians in Diaspora Achievers</a></div>
                                                     <div><a href="{{URL::to('articles/notable-profiles')}}">Notable Profiles </a></div>
                                                     <div><a style="padding: 5px 12px" href="{{URL::to('articles/regional-updates')}}"> Regional Updates </a></div>
-                                                    <div><a href="{{URL::to('articles/disapora-updates')}}">diaspora Updates </a></div>
+                                                    <div><a href="{{URL::to('articles/disapora-updates')}}">Diaspora Updates </a></div>
                                                     <div><a href="{{URL::to('articles/global-updates')}}"> Global Updates </a></div>
                                                     <div><a href="{{URL::to('articles/tribes-and-culture')}}"> Tribes & Culture </a></div>
                                                     <div ><a href="{{URL::to('articles/agriculture')}}">Agriculture </a></div>
