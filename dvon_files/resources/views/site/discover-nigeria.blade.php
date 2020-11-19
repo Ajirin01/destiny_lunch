@@ -214,15 +214,17 @@
                     </div>
                     <!-- Popular News Widget -->
                     <div class="popular-news-widget mb-30">
-                        <h4 style="color: red">4 Most Recent Updates</h4>
+                        <h4 style="color: red">Most Recent Updates</h4>
                         @foreach ($latest_articles as $key => $latest)
                             <!-- Single Popular Blog -->
-                            <div class="single-popular-post">
-                                <a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">
-                                <h6><span>{{$key + 1}}.</span> {{$latest['article_title']}}</h6>
-                                </a>
-                                <p>{{\Carbon\Carbon::parse($latest['created_at'])->diffforHumans()}}</p>
-                            </div>
+                            @if ($key < 6)
+                                <div class="single-popular-post">
+                                    <a href="{{URL::to('articles/'.$latest['article_type'].'/'.$latest['id'])}}">
+                                    <h6><span>{{$key + 1}}.</span> {{$latest['article_title']}}</h6>
+                                    </a>
+                                    <p>{{\Carbon\Carbon::parse($latest['created_at'])->diffforHumans()}}</p>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
 
