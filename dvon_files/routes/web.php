@@ -18,6 +18,9 @@ Route::get('/register-next', function(Request $request){
 //place advert routes
 Route::get('/place-your-adverts', 'site\TopLeftLinksController@place_advert')->middleware('auth');
 
+//external link home page
+Route::get('/link/{link}', 'Links\linksController@detail');
+
 //blog posts routes
 Route::prefix('blog')->group(function(){
     // Route::get('posts',	'Blog\postsController@allPosts')->name('posts');

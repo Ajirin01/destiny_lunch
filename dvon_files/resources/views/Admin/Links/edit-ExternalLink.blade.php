@@ -158,70 +158,43 @@
                             @endif
                         </h4>
                         <br>
-                        <span>Please select the number of links to create</span>
-                        <select id="num">
-                            @for ($i = 0; $i < 7; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                            @endfor
-                        </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2">
-                    <form action="{{ route('external-links.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ url('admin/external-links/'.$ExternalLink->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        @method('PUT')
                             <div id="form">
-                                
+                                <div class="form-group">
+                                    <label>Link Name</label>
+                                    <input class="form-control" type="text" name="link_name" value="{{$ExternalLink->link_name}}">
+                                </div>
+                                    <div class="form-group">
+                                    <label>Link URL</label>
+                                    <input class="form-control" type="text" name="link_url" value="{{$ExternalLink->link_url}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Link Intro Background</label>
+                                <input class="form-control" type="file" name="link_intro_background" value="{{$ExternalLink->link_intro_background}}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Link Intro Description</label>
+                                    <textarea cols="30" rows="15" class="form-control"  name="link_intro_description">
+                                        @php
+                                            echo $ExternalLink->link_intro_description
+                                        @endphp
+                                    </textarea>
+                                </div>
                             </div>
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Create links</button>
+                                <button class="btn btn-primary submit-btn">Update Link</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-            var num = document.getElementById('num')
-            var form = document.getElementById('form')
-        
-            num.onchange = () => {
-                console.log(num.value)
-                var i = 0
-                
-                    var chd = '<div id="form" class="form-group" style="border-bottom: 2px purple dotted">'
-                        chd +=    '</div>'
-                        chd +=  '<div class="form-group">'
-                        chd +=      '<label>Link Name</label>'
-                        chd +=      '<input class="form-control" type="text" name="links_name[]">'
-                        chd +=  '</div>'
-                        chd +=  '<div class="form-group">'
-                        chd +=      '<label>Link URL</label>'
-                        chd +=      '<input class="form-control" type="text" name="links_url[]">'
-                        chd +=  '</div>'
-                        chd +=  '<div class="form-group">'
-                        chd +=      '<label>Link Intro Background</label>'
-                        chd +=      '<input class="form-control" type="file" name="link_background[]">'
-                        chd +=  '</div>'
-                        chd +=  '<div class="form-group">'
-                        chd +=      '<label>Link Intro Description</label>'
-                        chd +=      '<textarea cols="30" rows="15" class="form-control"  name="link_intro_description[]"></textarea>'
-                        chd +=  '</div>'
-                        var form_inner = ""
-                        for(i; i< num.value; i++){
-                            form_inner += chd;
-                            
-                        }
-                        form.innerHTML=form_inner
-                        tinymce.init({
-                                selector: "textarea",
-                                plugins: 'textcolor colorpicker textpattern preview link wordcount lists',
-                                toolbar1:'insertfole undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-                                toolbar2:'preview link | forecolor backcolor fontselect',
-                            });
-            }
-        </script>
-
     <div class="sidebar-overlay" data-reff=""></div>
     </div>
     <script src="{{ asset('admin/assets/js/jquery-3.2.1.min.js') }}"></script>
@@ -239,6 +212,15 @@
     <script src="{{ asset('admin/assets/js/jquery.fullcalendar.js') }}"></script>
     <script src="{{ asset('admin/assets/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/assets/js/tinymce.min.js') }}"></script>
+    <script>
+        tinymce.init({
+                selector: "textarea",
+                plugins: 'textcolor colorpicker textpattern preview link wordcount lists',
+                toolbar1:'insertfole undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
+                toolbar2:'preview link | forecolor backcolor fontselect',
+            });
+        
+    </script>
     
 </body>
 

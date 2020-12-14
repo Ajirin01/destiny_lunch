@@ -17,6 +17,8 @@ class CreateExternalLinksTable extends Migration
             $table->bigIncrements('id');
             $table->string('link_name');
             $table->string('link_url');
+            $table->string('link_intro_background');
+            $table->text('link_intro_description');
             $table->timestamps();
         });
     }

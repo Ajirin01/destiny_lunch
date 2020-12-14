@@ -314,6 +314,24 @@
                     <!-- Single Featured Post -->
                     <div class="single-blog-post small-featured-post d-flex">
                         <div class="post-data">
+                            <a href="/articles/celebrities-corner" class="post-catagory">Celebrities Corner</a>
+                        </div>
+                    </div>
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post small-featured-post d-flex">
+                        <div class="post-data">
+                            <a href="/articles/generation-next" class="post-catagory">Generation Next (7-19 yrs Old)</a>
+                        </div>
+                    </div>
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post small-featured-post d-flex">
+                        <div class="post-data">
+                            <a href="/articles/upcoming-nigeria-stars" class="post-catagory">Upcoming Nigeria Stars</a>
+                        </div>
+                    </div>
+                    <!-- Single Featured Post -->
+                    <div class="single-blog-post small-featured-post d-flex">
+                        <div class="post-data">
                             <a href="/articles/family-and-parenting" class="post-catagory">Family & Parenting</a>
                         </div>
                     </div>
@@ -394,6 +412,9 @@
                                                     <div ><a style=""  href="{{URL::to('articles/humanitarian')}}">Humanitarian </a></div>
                                                     <div ><a href="{{URL::to('articles/destiny-nigeria-development-projects-initiatives')}}">Destiny Nigeria Development Projects "DNDP" initiatives</a></div>
                                                     <div ><a href="{{URL::to('blog/create')}}">Create Blog</a></div>
+                                                    <div ><a style="padding: 5px 32px" style=""  href="{{URL::to('articles/network-marketer-group')}}">Network Marketer Group </a></div>
+                                                    <div ><a style="padding: 5px 32px" href="{{URL::to('articles/all-nigeria-entrepreneur-group')}}">All Nigeria Entrepreneur Group</a></div>
+                                                    <div ><a style="padding: 5px 32px" href="{{URL::to('articles/start-a-career-with-us')}}">Start a Cereer With Us</a></div>
                                                     
                                             </div>
                                         </div>
@@ -471,7 +492,8 @@
                     <div class="nav justify-content-center">
                         @foreach ($external_links as $link)
                             <div class="blog-links text-center">
-                                <a style="color: white" href="//{{$link->link_url}}">{{$link->link_name}}</a>
+                                {{-- <a style="color: white" href="//{{$link->link_url}}">{{$link->link_name}}</a> --}}
+                            <a style="color: white" href="{{ url('link/'.$link->link_name)}}">{{$link->link_name}}</a>
                             </div>
                         @endforeach
                     </div>

@@ -173,4 +173,5 @@
     <script type="text/javascript" src="{{ asset('admin/assets/js/ini_tinymce.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/assets/js/tiny_mce_src.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/assets/js/init-tinymce.js') }}"></script>
+    
 </body>
