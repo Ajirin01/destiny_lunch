@@ -7,7 +7,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('like/{id}', function(Request $request, $id){
-    $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "http://destiny.com");
+    $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "https://dnvonline.com", "http://destiny.com");
 
     if(isset($_SERVER['HTTP_ORIGIN'])){
         if(in_array($_SERVER['HTTP_ORIGIN'], $accepted_origin)){
@@ -46,7 +46,7 @@ Route::post('like/{id}', function(Request $request, $id){
 });
 
 Route::post('/upload-tinymce', function(Request $request){
-    $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "http://destiny.com");
+    $accepted_origin = array("http://localhost:8000", "http://dnvonline.com", "https://dnvonline.com", "http://destiny.com");
     
     if($request->has('file')){
         $image = $request->file('file');
